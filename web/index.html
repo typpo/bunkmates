@@ -52,6 +52,9 @@
 <!------------------------------------------- MAIN LISTING / SEARCH VIEW --------- -->
   <div id="listings" class="slide">
     <div class="container">
+      <p class="lead">
+        Stay at nice hotels for cheap.
+      </p>
       <p>
           <button id="login" class="btn">Log me in ;)</button>
           <button id="create_new_listing" class="btn">Create a new listing</button>
@@ -64,7 +67,9 @@
 <!------------------------------------------- ADD LISTING --------- -->
   <div id="add_listing" class="slide hidden">
     <div class="container col-sm-offset-0  col-sm-12">
-      <h4>Make some money off your hotel room.</h4>
+      <p class="lead">
+        Make some money off your hotel room.
+      </p>
       <p>
         &rarr; I'm looking for someone to split my room costs at...
         <input id="hotel_name" type="text" class="input-lg"
@@ -137,7 +142,7 @@
     </div>
     <div>
       <center>
-      <img src="<%= listing.attributes.img %>"/>
+      <img src="<%= listing.attributes.img %>" class="img-rounded img-responsive"/>
       </center>
     </div>
   </div>
