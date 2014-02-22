@@ -26,7 +26,7 @@ function submit_listing() {
         first_name: resp.first_name,
         fb_id: resp.id,
         host_email: resp.email,
-        host_gender: resp.gender,
+        host_gender: resp.gender
       }, {
         success: function(listing) {
           // The object was saved successfully.
@@ -106,6 +106,10 @@ function hotel_input() {
       $dropdown.fadeIn(100);
     }
   });
+}
+
+function submit_request() {
+
 }
 
 function hotel_selected() {
