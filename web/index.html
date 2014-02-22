@@ -133,6 +133,8 @@
       <div style="font-size: 30px; font-weight:bold">
         <a href="#listing?<%= listing.id %>"><%= listing.attributes.hotel %></a></span>
         <br>
+        <%= listing.attributes.rating %>-star
+        <br>
         <span style="font-size: 25px; font-weight: bold;">$<%= listing.attributes.price %>
       </div>
       <span style="font-size: 12px">
@@ -151,17 +153,23 @@
 </script>
 
 <script type="text/html" id="listing_desc_tmpl">
-  <h2><%= listing.attributes.hotel %></h2>
+  <h4>Stay at <%= listing.attributes.hotel %> for cheap!</h4>
+  <p>
+  <img src="<%= listing.attributes.img %>" class="img-rounded img-responsive" />
+  <%= listing.attributes.rating %>-star
+  <br>
+  <%= listing.attributes.address %>
+  </p>
   <p>
   <img src="https://graph.facebook.com/<%= listing.attributes.fb_id %>/picture?type=square"/>
   <%= listing.attributes.name %> says, "<em><%= listing.attributes.desc %></em>"
   </p>
   <p>
     Tell <%= listing.attributes.first_name %> about yourself.
-    <textarea id="user_desc" class="form-control" rows="3">long walks on the beach</textarea>
+    <textarea id="guest_desc" class="form-control" rows="3">long walks on the beach</textarea>
   </p>
   <p>
-    We will contact <%= listing.attributes.first_name %> at let <%= listing.attributes.host_gender == 'male' ? 'him' : 'her' %> know you want to share a room.
+    We'll contact <%= listing.attributes.first_name %> at let <%= listing.attributes.host_gender == 'male' ? 'him' : 'her' %> know you want to share a room.
   </p>
 </script>
 

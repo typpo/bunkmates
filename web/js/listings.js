@@ -1,6 +1,7 @@
 'use strict';
 
 var Listing = Parse.Object.extend("Listing");
+var Transaction = Parse.Object.extend("Transaction");
 
 var selected_hotel_info = {};
 
@@ -44,6 +45,7 @@ function submit_listing() {
         success: function(listing) {
           // The object was saved successfully.
           // TODO some indicator of success
+          alert('Your bed was listed!');
           window.location.hash = '#';
         },
         error: function(listing, error) {
@@ -132,7 +134,51 @@ function hotel_input() {
 }
 
 function submit_request() {
+  var txn = new Transaction();
+  var guest_desc = $('#guest_desc').val();
+  var phone = prompt('Please enter your phone number.');
 
+  var proceed = function() {
+    console.log('proceeding');
+    FB.api('/me', function(resp) {
+      // Save the TXN
+      txn.save({
+        state: 'PENDING_APPROVAL',
+        listing_id: listing_id,
+        guest_name: resp.first_name + ' ' + resp.last_name,
+        guest_first_name: resp.first_name,
+        guest_fb_id: resp.id,
+        guest_email: resp.email,
+        guest_gender: resp.gender,
+        guest_phone: phone,
+        guest_desc: guest_desc
+      }, {
+        success: function(listing) {
+          // The object was saved successfully.
+          // TODO some indicator of success
+          alert('Your request was sent!');
+          window.location.hash = '#';
+        },
+        error: function(listing, error) {
+          // The save failed.
+          // error is a Parse.Error with an error code and description.
+          alert('Sorry, something went wrong.');
+        }
+      });
+    });
+  }
+
+  FB.getLoginStatus(function(response) {
+    if (response.status === 'connected') {
+      var uid = response.authResponse.userID;
+      var accessToken = response.authResponse.accessToken;
+      proceed();
+    } else if (response.status === 'not_authorized') {
+      fblogin(proceed);
+    } else {
+      fblogin(proceed);
+    }
+   });
 }
 
 function hotel_selected() {
