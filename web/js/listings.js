@@ -27,20 +27,21 @@ function submit_listing() {
   return false;
 }
 
+var listings_map = {};
 function fill_listings() {
   var q = new Parse.Query(Listing);
   q.descending('createdAt');
 
   q.find({
     success: function(listings) {
-      console.log(listings);
+      listings_map = {};
       var html = '';
       $.map(listings, function(listing) {
         html += tmpl('listing_tmpl', {
-          listing: listing.attributes
+          listing: listing
         });
+        listings_map[listing.id] = listing;
       });
-      console.log(html);
       $('#list_of_listings').html(html);
     }
   });
@@ -68,5 +69,13 @@ function hotel_input() {
       $dropdown.fadeIn(100);
     }
   });
+}
 
+function load_listing(id) {
+  var listing = listings_map[id];
+  if (!listing) {
+    alert('Sorry, something went wrong and we couldn\'t find this listing.');
+    window.location.hash = '#';
+    return;
+  }
 }

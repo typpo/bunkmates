@@ -49,23 +49,22 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+<!------------------------------------------- MAIN LISTING / SEARCH VIEW --------- -->
   <div id="listings" class="slide">
     <div class="container">
       <p>
           <button id="login" class="btn">Log me in ;)</button>
-      </p>
-      <p>
           <button id="create_new_listing" class="btn">Create a new listing</button>
       </p>
-    </div>
-    <div class="container">
       <div id="list_of_listings">
 
       </div>
     </div>
   </div>
+<!------------------------------------------- ADD LISTING --------- -->
   <div id="add_listing" class="slide hidden">
     <div class="container col-sm-offset-0  col-sm-12">
+      <h4>Make some money off your hotel room.</h4>
       <p>
         &rarr; I'm looking for someone to split my room costs at...
         <input id="hotel_name" type="text" class="input-lg"
@@ -82,6 +81,22 @@
         <textarea id="user_desc" class="form-control" rows="3">blah blah blah</textarea>
       </p>
       <button id="submit_listing" class="btn btn-block btn-lg btn-success">List my room!</button>
+    </div>
+  </div>
+<!------------------------------------------- INDIVIDUAL LISTING --------- -->
+  <div id="listing" class="slide hidden">
+    <div class="container col-sm-offset-0  col-sm-12">
+      <p>
+        You're looking at
+      </p>
+      <p>
+        Tell XXX about yourself.
+        <textarea id="user_desc" class="form-control" rows="3">long walks on the beach</textarea>
+      </p>
+      <p>
+        We will contact XXX at let them know you want to share a room.
+      </p>
+      <button id="submit_listing" class="btn btn-block btn-lg btn-success">Get It</button>
     </div>
   </div>
 
@@ -106,11 +121,10 @@
 
 <script type="text/html" id="listing_tmpl">
   <div class="listing">
-    <h3><%= listing.hotel %></h3>
-    Price: <strong>$<%= listing.price %></strong>
+    <span style="font-size: 30px; font-weight:bold"><a href="#listing?q=<%= listing.id %>"><%= listing.attributes.hotel %></a></span> -- <span style="font-size: 25px; font-weight: bold;">$<%= listing.attributes.price %></span>
 
     <p>
-    <%= listing.desc %>
+    <%= listing.attributes.desc %>
     </p>
 
   </div>
