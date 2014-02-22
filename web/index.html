@@ -74,7 +74,11 @@
       </p>
       <p>
         &rarr; I'm charging $
-        <input id="charge" type="text" type="number" class="input-lg" placeholder="40" value="40" style="width:4em"/>
+        <input id="charge" type="number" class="input-lg" placeholder="40" value="40" style="width:4em"/>
+      </p>
+      <p>
+        &rarr; What's yo number?
+        <input id="phone_number" type="tel" class="input-lg" placeholder="9147727420" value="9147727420" style="width:8em"/>
       </p>
       <p>
         Give us some details about yourself and your room.
@@ -128,7 +132,7 @@
 <script type="text/html" id="listing_desc_tmpl">
   <h2><%= listing.attributes.hotel %></h2>
   <p>
-  <img src="https://graph.facebook.com/<%= listing.attributes.fb_id %>/picture?type=normal"/>
+  <img src="https://graph.facebook.com/<%= listing.attributes.fb_id %>/picture?type=square"/>
   <%= listing.attributes.name %> says, "<em><%= listing.attributes.desc %></em>"
   </p>
   <p>

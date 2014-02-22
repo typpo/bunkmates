@@ -8,6 +8,7 @@ function submit_listing() {
   var hotel_name = $('#hotel_name').val();
   var price = parseFloat($('#charge').val());
   var desc = $('#user_desc').val();
+  var phone = $('#phone_number').val();
 
   var listing = new Listing();
   var eid = selected_hotel_info._source ? selected_hotel_info._source.id : '';
@@ -26,7 +27,8 @@ function submit_listing() {
         first_name: resp.first_name,
         fb_id: resp.id,
         host_email: resp.email,
-        host_gender: resp.gender
+        host_gender: resp.gender,
+        host_number: phone
       }, {
         success: function(listing) {
           // The object was saved successfully.
