@@ -55,11 +55,19 @@
       <p class="lead">
         Stay at nice hotels for cheap.
       </p>
-      <p>
-          <button id="login" class="btn">Log me in ;)</button>
-          <button id="create_new_listing" class="btn">Create a new listing</button>
-          <input id="places_auto" />
-      </p>
+      <div class="row">
+          <div class="col-xs-2">
+            <button id="login" class="btn">Log me in ;)</button>
+          </div>
+          <div class="col-xs-3">
+            <button id="create_new_listing" class="btn">Create a new listing</button>
+          </div>
+          <div class="col-xs-6">
+            <div class="form-group">
+              <input id="places_auto" class="input-lg form-control" />
+            </div>
+          </div>
+      </div>
       <div id="list_of_listings">
 
       </div>
@@ -73,18 +81,18 @@
       </p>
       <p>
         &rarr; I'm looking for someone to split my room costs at...
-        <input id="hotel_name" type="text" class="input-lg"
+        <input id="hotel_name" type="text" class="input-lg form-control"
                placeholder="hotel name" value="hotel california" />
         <ul id="hotel_dropdown">
         </ul>
       </p>
       <p>
         &rarr; I'm charging $
-        <input id="charge" type="number" class="input-lg" placeholder="40" value="" style="width:6em"/>
+        <input id="charge" type="number" class="input-lg form-control" placeholder="40" value="" style="width:6em"/>
       </p>
       <p>
         &rarr; What's yo number?
-        <input id="phone_number" type="tel" class="input-lg" placeholder="9147727420" value="9147727420" style="width:8em"/>
+        <input id="phone_number" type="tel" class="input-lg form-control" placeholder="9147727420" value="9147727420" style="width:8em"/>
       </p>
       <p>
         Give us some details about yourself and your room.

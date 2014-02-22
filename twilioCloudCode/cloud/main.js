@@ -1,4 +1,5 @@
 var client = require('twilio')('AC7b5178b4fe2c349a8fa476ccb6c51e25', '35de62cdf391327193a38065b7b1a273');
+var util = require('util');
 
 // Use Parse.Cloud.define to define as many cloud functions as you want.
 // For example:
@@ -8,9 +9,10 @@ Parse.Cloud.define("hello", function(request, response) {
 
 Parse.Cloud.define('sendRequest', function(request, response) {
   client.sendSms({
-      to: '+19147727429',
+      to: request.params.to,
       from: '+14152339929',
-      body: 'Someone wants to bunk with you!'
+      body: util.format('%s wants to split a room with you!  http://bunkmates.co/t/%s',
+        request.params.first_name, request.params.listing_id);
     }, function(err, responseData) {
       if (err) {
         console.log(err);

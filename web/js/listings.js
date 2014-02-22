@@ -40,7 +40,7 @@ function submit_listing() {
         fb_id: resp.id,
         host_email: resp.email,
         host_gender: resp.gender,
-        host_number: phone
+        host_phone: phone
       }, {
         success: function(listing) {
           // The object was saved successfully.
@@ -153,10 +153,14 @@ function submit_request() {
         guest_phone: phone,
         guest_desc: guest_desc
       }, {
-        success: function(listing) {
+        success: function(txn) {
           // The object was saved successfully.
           // TODO some indicator of success
-          Parse.Cloud.run('sendTest', {}, {
+          Parse.Cloud.run('sendTest', {
+            to: currently_viewing_listing.host_phone,
+            listing_id: currently_viewing_listing.id,
+            first_name: txn.first_name
+          }, {
             success: function(result) {
               alert('Your request was sent!');
             },
