@@ -136,7 +136,7 @@ function submit_request() {
       // Save the TXN
       txn.save({
         state: 'PENDING_APPROVAL',
-        listing_id: listing_id,
+        listing: currently_viewing_listing,
         guest_name: resp.first_name + ' ' + resp.last_name,
         guest_first_name: resp.first_name,
         guest_fb_id: resp.id,
@@ -148,7 +148,13 @@ function submit_request() {
         success: function(listing) {
           // The object was saved successfully.
           // TODO some indicator of success
-          alert('Your request was sent!');
+          Parse.Cloud.run('sendTest', {}, {
+            success: function(result) {
+              alert('Your request was sent!');
+            },
+            error: function(error) {
+            }
+          });
           window.location.hash = '#';
         },
         error: function(listing, error) {
@@ -178,6 +184,7 @@ function hotel_selected() {
   $('#hotel_name').val($li.html());
 }
 
+var currently_viewing_listing;
 function load_listing(id) {
   var listing = listings_map[id];
   if (!listing) {
@@ -185,6 +192,7 @@ function load_listing(id) {
     window.location.hash = '#';
     return;
   }
+  currently_viewing_listing = listing;
 
   $('#listing_desc').html(tmpl('listing_desc_tmpl', {
     listing: listing
