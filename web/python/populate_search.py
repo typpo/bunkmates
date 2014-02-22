@@ -20,8 +20,14 @@ def fillES(inFile, images):
         conn.indices.put_mapping('hotel', {'properties':mapping}, ['hotels'])
         break
       """
-      with open('../../expedia/Hotels.json', 'w') as jsonFile:
+      with open('../../expedia/HotelsBulk.json', 'w') as jsonFile:
         hotels = []
+        index = {
+            "index": {
+              "_index": "hotels",
+              "_type": "hotel"
+            }
+        }
         for i,obj in enumerate(csvDict):
           id = obj['\xef\xbb\xbfEANHotelID']
           del obj['\xef\xbb\xbfEANHotelID']
@@ -31,6 +37,9 @@ def fillES(inFile, images):
           else :
             obj["img"] = ""
           hotels.append(obj)
+          index["index"]["_id"] = id
+          jsonFile.write( json.dumps(index) )
+          jsonFile.write('\n')
           jsonFile.write( json.dumps(obj) )
           jsonFile.write('\n')
 
