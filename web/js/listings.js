@@ -10,15 +10,21 @@ function submit_listing() {
   var desc = $('#user_desc').val();
 
   var listing = new Listing();
-  var eid = selected_hotel_info._source ? selected_hotel_info._source.id : '';
+  if (!selected_hotel_info._source) {
+    alert('We didn\'t match a hotel. Please use the autocomplete');
+    return;
+  }
 
   var proceed = function() {
     console.log('proceeding');
     FB.api('/me', function(resp) {
       // SAVE THE LISTING
       listing.save({
-        id: selected_hotel_info._id,
-        eid: eid,
+        hid: selected_hotel_info._id,
+        eid: selected_hotel_info._source.id,
+        address: selected_hotel_info._source.Address1 + selected_hotel_info._source.Address2,
+        img: selected_hotel_info._source.img,
+        rating: selected_hotel_info._source.StarRating,
         hotel: hotel_name,
         price: price,
         desc: desc,
@@ -91,8 +97,8 @@ function hotel_input() {
       if (!data || !data.hits || !data.hits.hits || !data.hits.hits.length) {
         $dropdown.fadeOut(100);
       }
-      html = [];
-      for (i in data.hits.hits) {
+      var html = [];
+      for (var i in data.hits.hits) {
         html.push('<li hit="' + i + '">' + data.hits.hits[i]._source.Name + '</li>');
       }
       $dropdown.html(html.join(''));
