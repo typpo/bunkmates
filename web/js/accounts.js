@@ -1,3 +1,5 @@
+'use strict';
+
 function fblogin(cb) {
   Parse.FacebookUtils.logIn('email', {
     success: function(user) {
