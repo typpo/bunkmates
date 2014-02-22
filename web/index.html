@@ -89,7 +89,7 @@
       <p id="listing_desc">
 
       </p>
-      <button id="submit_listing" class="btn btn-block btn-lg btn-success">Get It</button>
+      <button id="submit_listing" class="btn btn-block btn-lg btn-success">Send request</button>
     </div>
   </div>
 
@@ -119,7 +119,7 @@
     <span style="font-size: 30px; font-weight:bold"><a href="#listing?<%= listing.id %>"><%= listing.attributes.hotel %></a></span> -- <span style="font-size: 25px; font-weight: bold;">$<%= listing.attributes.price %></span>
 
     <p>
-    <%= listing.attributes.desc %>
+    "<em><%= listing.attributes.desc %></em>"
     </p>
 
   </div>
