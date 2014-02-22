@@ -1,8 +1,16 @@
 body {
-    background: #eee;
+    background-color: #34495e;
     text-align: center;
     padding: 0 25px;
 }
+
+.container {
+    background-color: #E4EBF6;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 0 0 6px;
+}
+
 
 #main {
     width: 500px;
@@ -38,3 +46,13 @@ body {
     color: green;
     line-height: 13px;
 }
+
+.hidden {
+  display:none;
+}
+
+.active {
+  display: block;
+}
+
+

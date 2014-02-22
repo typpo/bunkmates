@@ -24,8 +24,32 @@ window.fbAsyncInit = function() {
     xfbml      : true  // parse XFBML
   });
 
-  /**************** Bind all actions here **************/
-  $('#login').on('click', fblogin);
 
 
 };
+
+$(function() {
+  $(window).on('hashchange', runhash);
+
+  function runhash() {
+    console.log('Hash changed');
+    $('.slide').addClass('hidden');
+    switch (window.location.hash) {
+      case "#add":
+        console.log('switching to add');
+        $('#add_listing').removeClass('hidden');
+        break;
+      default:
+        $('#listings').removeClass('hidden');
+        break;
+    }
+  }
+  runhash();
+
+  /**************** Bind all actions here **************/
+  $('#login').on('click', fblogin);
+  $('#add_listing').on('click', function() {
+    window.location.hash = '#add';
+  });
+  $('#submit_listing').on('click', submit_listing);
+});
