@@ -43,7 +43,6 @@ $(function() {
     }
     switch (hash) {
       case "#add":
-        console.log('switching to add');
         $('#add_listing').removeClass('hidden');
         break;
       case "#listing":
