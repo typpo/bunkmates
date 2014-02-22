@@ -127,8 +127,10 @@
 
 <script type="text/html" id="listing_desc_tmpl">
   <h2><%= listing.attributes.hotel %></h2>
+  <p>
   <img src="https://graph.facebook.com/<%= listing.attributes.fb_id %>/picture?type=normal"/>
   <%= listing.attributes.name %> says, "<em><%= listing.attributes.desc %></em>"
+  </p>
   <p>
     Tell <%= listing.attributes.first_name %> about yourself.
     <textarea id="user_desc" class="form-control" rows="3">long walks on the beach</textarea>
