@@ -45,3 +45,28 @@ function fill_listings() {
     }
   });
 }
+
+function hotel_input() {
+  var input_text = $('#hotel_name').val();
+  var $dropdown = $('#hotel_dropdown');
+  if (input_text.length < 3) {
+    $dropdown.fadeOut(100);
+    return;
+  }
+  var url = 'http://bunkmates.co:9200/hotels/_search?q=Name:' + input_text;
+  $.ajax({
+    url: url,
+    success: function(data) {
+      if (!data || !data.hits || !data.hits.hits || !data.hits.hits.length) {
+        $dropdown.fadeOut(100);
+      }
+      html = [];
+      for (i in data.hits.hits) {
+        html.push('<li>' + data.hits.hits[i]._source.Name + '</li>');
+      }
+      $dropdown.html(html.join(''));
+      $dropdown.fadeIn(100);
+    }
+  });
+
+}
