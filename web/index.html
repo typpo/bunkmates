@@ -134,7 +134,7 @@
     <textarea id="user_desc" class="form-control" rows="3">long walks on the beach</textarea>
   </p>
   <p>
-    We will contact <%= listing.attributes.first_name %> at let them know you want to share a room.
+    We will contact <%= listing.attributes.first_name %> at let <%= listing.attributes.host_gender == 'male' ? 'him' : 'her' %> know you want to share a room.
   </p>
 </script>
 
