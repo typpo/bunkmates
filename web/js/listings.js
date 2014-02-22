@@ -1,3 +1,5 @@
+'use strict';
+
 var Listing = Parse.Object.extend("Listing");
 
 function submit_listing() {
