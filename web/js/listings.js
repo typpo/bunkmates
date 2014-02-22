@@ -66,9 +66,20 @@ function hotel_input() {
         html.push('<li>' + data.hits.hits[i]._source.Name + '</li>');
       }
       $dropdown.html(html.join(''));
+      $('#hotel_dropdown li').on('click', function() {
+        var $li = $(this);
+        $('#hotel_name').val($li.html());
+        $dropdown.html('');
+        $dropdown.fadeOut(100);
+      });
       $dropdown.fadeIn(100);
     }
   });
+}
+
+function hotel_selected() {
+  var $li = $(this);
+  $('#hotel_name').val($li.html());
 }
 
 function load_listing(id) {
