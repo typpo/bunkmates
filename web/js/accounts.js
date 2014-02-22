@@ -2,14 +2,14 @@ function fblogin(cb) {
   Parse.FacebookUtils.logIn('email', {
     success: function(user) {
       if (!user.existed()) {
-        alert("User signed up and logged in through Facebook!");
-        cb(false);
+        //alert("User signed up and logged in through Facebook!");
+        cb(true);
       } else {
         cb(true);
       }
     },
     error: function(user, error) {
-      alert("User cancelled the Facebook login or did not fully authorize.");
+      alert("Could not fully authorize you.  We require Facebook accounts to make sure you're not creepy.");
     }
   });
 }
