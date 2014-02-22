@@ -34,10 +34,21 @@ $(function() {
   function runhash() {
     console.log('Hash changed');
     $('.slide').addClass('hidden');
-    switch (window.location.hash) {
+    var hash = window.location.hash;
+    var query = '';
+    if (hash.indexOf('?') > -1) {
+      var sp = hash.split('?');
+      hash = sp[0];
+      query = sp[1];
+    }
+    switch (hash) {
       case "#add":
         console.log('switching to add');
         $('#add_listing').removeClass('hidden');
+        break;
+      case "#listing":
+        $('#listing').removeClass('hidden');
+        load_listing(query);
         break;
       default:
         $('#listings').removeClass('hidden');

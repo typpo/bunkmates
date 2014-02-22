@@ -49,6 +49,7 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+<!------------------------------------------- MAIN LISTING / SEARCH VIEW --------- -->
   <div id="listings" class="slide">
     <div class="container">
       <p>
@@ -64,7 +65,26 @@
       </div>
     </div>
   </div>
+<!------------------------------------------- ADD LISTING --------- -->
   <div id="add_listing" class="slide hidden">
+    <div class="container col-sm-offset-0  col-sm-12">
+      <p>
+        &rarr; I'm looking for someone to split my room costs at...
+        <input id="hotel_name" type="text" class="input-lg" placeholder="hotel name" value="hotel california"/>
+      </p>
+      <p>
+        &rarr; I'm charging $
+        <input id="charge" type="text" type="number" class="input-lg" placeholder="40" value="40" style="width:4em"/>
+      </p>
+      <p>
+        Give us some details about yourself and your room.
+        <textarea id="user_desc" class="form-control" rows="3">blah blah blah</textarea>
+      </p>
+      <button id="submit_listing" class="btn btn-block btn-lg btn-success">List my room!</button>
+    </div>
+  </div>
+<!------------------------------------------- INDIVIDUAL LISTING --------- -->
+  <div id="listing" class="slide hidden">
     <div class="container col-sm-offset-0  col-sm-12">
       <p>
         &rarr; I'm looking for someone to split my room costs at...
@@ -103,11 +123,11 @@
 
 <script type="text/html" id="listing_tmpl">
   <div class="listing">
-    <h3><%= listing.hotel %></h3>
-    Price: <strong>$<%= listing.price %></strong>
+    <h3><a href="#listing?q=<%= listing.id %>"><%= listing.attributes.hotel %></a></h3>
+    Price: <strong>$<%= listing.attributes.price %></strong>
 
     <p>
-    <%= listing.desc %>
+    <%= listing.attributes.desc %>
     </p>
 
   </div>

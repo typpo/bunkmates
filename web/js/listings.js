@@ -37,7 +37,7 @@ function fill_listings() {
       var html = '';
       $.map(listings, function(listing) {
         html += tmpl('listing_tmpl', {
-          listing: listing.attributes
+          listing: listing
         });
       });
       console.log(html);
