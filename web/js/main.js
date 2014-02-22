@@ -51,12 +51,12 @@ $(function() {
         load_listing(query);
         break;
       default:
-        $('#listings').removeClass('hidden');
         fill_listings();
+        $('#listings').removeClass('hidden');
         break;
     }
   }
-  runhash();
+  fill_listings(runhash);
 
   /**************** Bind all actions here **************/
   $('#login').on('click', fblogin);

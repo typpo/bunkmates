@@ -83,8 +83,8 @@
 <!------------------------------------------- INDIVIDUAL LISTING --------- -->
   <div id="listing" class="slide hidden">
     <div class="container col-sm-offset-0  col-sm-12">
-      <p>
-        You're looking at
+      <p id="listing_desc">
+
       </p>
       <p>
         Tell XXX about yourself.
@@ -118,7 +118,7 @@
 
 <script type="text/html" id="listing_tmpl">
   <div class="listing">
-    <span style="font-size: 30px; font-weight:bold"><a href="#listing?q=<%= listing.id %>"><%= listing.attributes.hotel %></a></span> -- <span style="font-size: 25px; font-weight: bold;">$<%= listing.attributes.price %></span>
+    <span style="font-size: 30px; font-weight:bold"><a href="#listing?<%= listing.id %>"><%= listing.attributes.hotel %></a></span> -- <span style="font-size: 25px; font-weight: bold;">$<%= listing.attributes.price %></span>
 
     <p>
     <%= listing.attributes.desc %>
@@ -126,6 +126,12 @@
 
   </div>
 </script>
+
+<script type="text/html" id="listing_desc_tmpl">
+  <h2><%= listing.attributes.hotel %></h2>
+  <%= listing.attributes.desc %>
+</script>
+
 
 </body>
 

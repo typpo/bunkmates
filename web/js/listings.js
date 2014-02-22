@@ -28,7 +28,7 @@ function submit_listing() {
 }
 
 var listings_map = {};
-function fill_listings() {
+function fill_listings(cb) {
   var q = new Parse.Query(Listing);
   q.descending('createdAt');
 
@@ -43,6 +43,7 @@ function fill_listings() {
         listings_map[listing.id] = listing;
       });
       $('#list_of_listings').html(html);
+      cb();
     }
   });
 }
@@ -54,4 +55,8 @@ function load_listing(id) {
     window.location.hash = '#';
     return;
   }
+
+  $('#listing_desc').html(tmpl('listing_desc_tmpl', {
+    listing: listing
+  }));
 }
