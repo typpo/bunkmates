@@ -6,39 +6,41 @@
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="lib/chui/chui-ios-3.5.2.min.css">
+<!--
   <link rel="stylesheet" href="http://designmodo.github.io/Flat-UI/bootstrap/css/bootstrap.css">
   <link rel="stylesheet" href="http://designmodo.github.io/Flat-UI/css/flat-ui.css">
+-->
 </head>
 
 <body>
-<div id="container">
-  <div id="main">
-    <h1>Welcome to Bunkmates!</h1>
+  <nav class="current">
+    <h1>bunkmates</h1>
+  </nav>
+  <nav class="next">
+    <h1 data-goto="add">+ Add</h1>
+  </nav>
 
-    <p>Bunkmates.co is the best place to find bunkmates.</p>
+  <article class="current" id="listings">
+    <section>
+      <p>
+          <button id="login" class="btn">Log me in ;)</button>
+      </p>
+      <p>
+          <a href="#add" class="btn">Create a new listing</a>
+      </p>
+    </section>
+  </article>
+  <article class="next" id="add">
+    <form>
 
-    <ul>
-      <li><a href="https://www.parse.com/docs/js_guide">Parse JavaScript Guide</a></li>
-      <li><a href="https://www.parse.com/docs/js">Parse JavaScript API Documentation</a></li>
-    </ul>
-
-  <p>
-      <button id="login" class="btn">Log me in ;)</button>
-  </p>
-  <p>
-      <a href="#add" class="btn">Create a new listing</a>
-  </p>
-  </div>
-</div>
-
-<div id="add_listing">
-I got a boner
-</div>
+    </form>
+  </article>
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.16.min.js"></script>
 <script type="text/javascript" src="lib/fastclick.js"></script>
-<script type="text/javascript" src="lib/pageslider.js"></script>
+<script src="lib/chui/chui-3.5.2.min.js"></script>
 <script type="text/javascript" src="js/main.js"></script>
 <script type="text/javascript" src="js/accounts.js"></script>
 
