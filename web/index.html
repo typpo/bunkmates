@@ -74,7 +74,7 @@
       </p>
       <p>
         &rarr; I'm charging $
-        <input id="charge" type="number" class="input-lg" placeholder="40" value="" style="width:4em"/>
+        <input id="charge" type="number" class="input-lg" placeholder="40" value="" style="width:6em"/>
       </p>
       <p>
         &rarr; What's yo number?
@@ -118,10 +118,19 @@
 
 <script type="text/html" id="listing_tmpl">
   <div class="listing">
-    <%= listing.attributes.first_name %>
-    <img src="https://graph.facebook.com/<%= listing.attributes.fb_id %>/picture"/>
-    <span style="font-size: 30px; font-weight:bold"><a href="#listing?<%= listing.id %>"><%= listing.attributes.hotel %></a></span> -- <span style="font-size: 25px; font-weight: bold;">$<%= listing.attributes.price %></span>
+    <img src="<%= listing.attributes.img %>"/>
+    <p>
 
+    <img src="https://graph.facebook.com/<%= listing.attributes.fb_id %>/picture"/>
+    <%= listing.attributes.first_name %> wants to share a room at
+
+    <div style="font-size: 30px; font-weight:bold; margin-left: 30px;">
+    <a href="#listing?<%= listing.id %>"><%= listing.attributes.hotel %></a></span> -- <span style="font-size: 25px; font-weight: bold;">$<%= listing.attributes.price %>
+    </div>
+    <span style="font-size: 12px">
+    <%= listing.attributes.address %>
+    </span>
+    </p>
     <p>
     "<em><%= listing.attributes.desc %></em>"
     </p>
