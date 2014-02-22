@@ -74,7 +74,11 @@
       </p>
       <p>
         &rarr; I'm charging $
-        <input id="charge" type="text" type="number" class="input-lg" placeholder="40" value="40" style="width:4em"/>
+        <input id="charge" type="number" class="input-lg" placeholder="40" value="40" style="width:4em"/>
+      </p>
+      <p>
+        &rarr; What's yo number?
+        <input id="phone_number" type="tel" class="input-lg" placeholder="9147727420" value="9147727420" style="width:8em"/>
       </p>
       <p>
         Give us some details about yourself and your room.
@@ -89,7 +93,7 @@
       <p id="listing_desc">
 
       </p>
-      <button id="submit_listing" class="btn btn-block btn-lg btn-success">Get It</button>
+      <button id="submit_request" class="btn btn-block btn-lg btn-success">Send request</button>
     </div>
   </div>
 
@@ -119,7 +123,7 @@
     <span style="font-size: 30px; font-weight:bold"><a href="#listing?<%= listing.id %>"><%= listing.attributes.hotel %></a></span> -- <span style="font-size: 25px; font-weight: bold;">$<%= listing.attributes.price %></span>
 
     <p>
-    <%= listing.attributes.desc %>
+    "<em><%= listing.attributes.desc %></em>"
     </p>
 
   </div>
@@ -127,8 +131,10 @@
 
 <script type="text/html" id="listing_desc_tmpl">
   <h2><%= listing.attributes.hotel %></h2>
-  <img src="https://graph.facebook.com/<%= listing.attributes.fb_id %>/picture?type=normal"/>
+  <p>
+  <img src="https://graph.facebook.com/<%= listing.attributes.fb_id %>/picture?type=square"/>
   <%= listing.attributes.name %> says, "<em><%= listing.attributes.desc %></em>"
+  </p>
   <p>
     Tell <%= listing.attributes.first_name %> about yourself.
     <textarea id="user_desc" class="form-control" rows="3">long walks on the beach</textarea>

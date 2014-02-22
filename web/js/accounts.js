@@ -5,9 +5,9 @@ function fblogin(cb) {
     success: function(user) {
       if (!user.existed()) {
         //alert("User signed up and logged in through Facebook!");
-        cb(true);
+        cb && cb(true);
       } else {
-        cb(true);
+        cb && cb(true);
       }
     },
     error: function(user, error) {

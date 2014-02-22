@@ -8,6 +8,7 @@ function submit_listing() {
   var hotel_name = $('#hotel_name').val();
   var price = parseFloat($('#charge').val());
   var desc = $('#user_desc').val();
+  var phone = $('#phone_number').val();
 
   var listing = new Listing();
   if (!selected_hotel_info._source) {
@@ -33,6 +34,7 @@ function submit_listing() {
         fb_id: resp.id,
         host_email: resp.email,
         host_gender: resp.gender,
+        host_number: phone
       }, {
         success: function(listing) {
           // The object was saved successfully.
@@ -112,6 +114,10 @@ function hotel_input() {
       $dropdown.fadeIn(100);
     }
   });
+}
+
+function submit_request() {
+
 }
 
 function hotel_selected() {

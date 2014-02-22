@@ -67,6 +67,9 @@ $(function() {
   $('#submit_listing').on('click', function() {
     submit_listing();
   });
+  $('#submit_request').on('click', function() {
+    submit_request();
+  });
   $('#hotel_name').on('keyup', function() {
     hotel_input();
   });
@@ -77,7 +80,6 @@ $(function() {
 window.tmpl = null;
 (function(window){
   var cache = {};
-
   window.tmpl = function tmpl(str, data){
     // Figure out if we're getting a template, or if we need to
     // load the template - and be sure to cache the result.
