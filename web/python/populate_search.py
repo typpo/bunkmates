@@ -1,13 +1,7 @@
 import csv
 import json
-from pyes import *
 
-def setupES(delete=False):
-  conn = ES('bunkmates.co:9200')
-  conn.indices.create_index_if_missing('hotels')
-  return conn
-
-def fillES(inFile, images, conn):
+def fillES(inFile, images):
   with open(inFile, 'r') as csvFile:
       csvDict = csv.DictReader(csvFile, delimiter="|")
       """
@@ -37,7 +31,8 @@ def fillES(inFile, images, conn):
           else :
             obj["img"] = ""
           hotels.append(obj)
-          jsonFile.write( json.dumps(obj) );
+          jsonFile.write( json.dumps(obj) )
+          jsonFile.write('\n')
 
 def getImages(inFile):
   with open(inFile, 'r') as csvFile:
@@ -50,6 +45,5 @@ def getImages(inFile):
       return images
 
 if __name__ == "__main__":
-  conn = setupES()
-  images = getImages('../../expedia/HotelImageList.txt')
-  fillES('../../expedia/ActivePropertyList.txt', images, conn)
+  images = getImages('/home/ubuntu/expedia/HotelImageList.txt')
+  fillES('/home/ubuntu/expedia/ActivePropertyList.txt', images)

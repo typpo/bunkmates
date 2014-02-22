@@ -1,6 +1,10 @@
 num=0
+path=http://localhost:9200/hotels/hotel/
 cat Hotels.json | while read line
 do
-  CURL -XPUT 'http://bunkmates.co:9200/hotels/$num' -d $line
+#line=`echo $line | tr \" \'`
+  line=\'$line\'
+  echo $line
+  curl -XPUT $path$num -d $line
   num=$(($num+1))
 done
