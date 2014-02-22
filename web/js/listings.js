@@ -108,6 +108,12 @@ function hotel_input() {
         var $li = $(this);
         $('#hotel_name').val($li.html());
         selected_hotel_info = data.hits.hits[$li.attr('hit')];
+        var $charge = $('#charge');
+        if (!$charge.val()) {
+          var cost = Math.floor( (parseFloat(selected_hotel_info._source.HighRate) +
+                                  parseFloat(selected_hotel_info._source.LowRate)) / 4);
+          $charge.val(cost);
+        }
         $dropdown.html('');
         $dropdown.fadeOut(100);
       });
