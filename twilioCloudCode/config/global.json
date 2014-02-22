@@ -1,0 +1,11 @@
+{
+    "applications": {
+        "_default": {
+            "link": "bunkmates-app"
+        }, 
+        "bunkmates-app": {
+            "applicationId": "eYl06p1bCOWl7oInD4z6MTtNuNJGkAeC8vRWMB3b", 
+            "masterKey": "gvjuHxydKVFqU2fO8KbWNn49GGSPTjzzyGqN3kbC"
+        }
+    }
+}
