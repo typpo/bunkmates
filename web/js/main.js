@@ -12,8 +12,30 @@ var testObject = new TestObject();
   }
 });
 */
-
 window.fbAsyncInit = function() {
+  // Nav setup
+  new FastClick(document.body);
+  var slider = new PageSlider($("#container"));
+  $(window).on('hashchange', route);
+
+  // Basic page routing
+  function route(event) {
+      var page,
+          hash = window.location.hash;
+
+      if (hash === "#add") {
+        page = document.getElementById('add_listing').innerHTML;
+
+  //        slider.slide($(page), "right");
+      } else {
+        page = document.getElementById('main').innerHTML;
+  //        slider.slide($(homePage), "left");
+      }
+
+      slider.slidePage($(page));
+
+  }
+
   Parse.FacebookUtils.init({
     appId      : '586631808094294', // Facebook App ID
     //channelUrl : '//WWW.YOUR_DOMAIN.COM/channel.html', // Channel File
@@ -24,9 +46,6 @@ window.fbAsyncInit = function() {
 
   /**************** Bind all actions here **************/
   $('#login').on('click', fblogin);
-
-  $('#new_listing').on('click', new_listing);
-
 
 
 };

@@ -1,6 +1,7 @@
 
 
 function new_listing() {
-  alert('NYI');
+  document.location.href = "#add_listing";
+
 
 }
