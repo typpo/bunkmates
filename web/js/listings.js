@@ -156,7 +156,7 @@ function submit_request() {
         success: function(txn) {
           // The object was saved successfully.
           // TODO some indicator of success
-          Parse.Cloud.run('sendTest', {
+          Parse.Cloud.run('sendRequest', {
             to: currently_viewing_listing.host_phone,
             listing_id: currently_viewing_listing.id,
             first_name: txn.first_name
