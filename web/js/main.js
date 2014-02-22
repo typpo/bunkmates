@@ -65,6 +65,9 @@ $(function() {
   $('#submit_listing').on('click', function() {
     submit_listing();
   });
+  $('#hotel_name').on('keyup', function() {
+    hotel_input();
+  });
 });
 
 // Simple JavaScript Templating
