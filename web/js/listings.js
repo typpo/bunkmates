@@ -101,7 +101,8 @@ function hotel_input() {
       }
       var html = [];
       for (var i in data.hits.hits) {
-        html.push('<li hit="' + i + '">' + data.hits.hits[i]._source.Name + '</li>');
+        html.push('<li hit="' + i + '">' + data.hits.hits[i]._source.Name + ', '
+                  + data.hits.hits[i]._source.City + '</li>');
       }
       $dropdown.html(html.join(''));
       $('#hotel_dropdown li').on('click', function() {
