@@ -20,9 +20,14 @@ function submit_listing() {
   var proceed = function() {
     console.log('proceeding');
     FB.api('/me', function(resp) {
+      var geo_point = new Parse.GeoPoint({
+        latitude: parseFloat(selected_hotel_info._source.Latitude),
+        longitude: parseFloat(selected_hotel_info._source.Longitude)
+      });
       // SAVE THE LISTING
       listing.save({
         hid: selected_hotel_info._id,
+        location: geo_point,
         eid: selected_hotel_info._source.id,
         address: selected_hotel_info._source.Address1 + selected_hotel_info._source.Address2,
         img: selected_hotel_info._source.img,
@@ -67,22 +72,25 @@ function submit_listing() {
 }
 
 var listings_map = {};
-function fill_listings(cb) {
+function fill_listings(listings, cb) {
+  listings_map = {};
+  var html = '';
+  $.map(listings, function(listing) {
+    html += tmpl('listing_tmpl', {
+      listing: listing
+    });
+    listings_map[listing.id] = listing;
+  });
+  $('#list_of_listings').html(html);
+  if(cb) cb();
+}
+function get_all_listings(cb) {
   var q = new Parse.Query(Listing);
   q.descending('createdAt');
 
   q.find({
     success: function(listings) {
-      listings_map = {};
-      var html = '';
-      $.map(listings, function(listing) {
-        html += tmpl('listing_tmpl', {
-          listing: listing
-        });
-        listings_map[listing.id] = listing;
-      });
-      $('#list_of_listings').html(html);
-      if(cb) cb();
+      fill_listings(listings, cb);
     }
   });
 }
@@ -197,4 +205,21 @@ function load_listing(id) {
   $('#listing_desc').html(tmpl('listing_desc_tmpl', {
     listing: listing
   }));
+}
+
+function filter_results(loc, cb) {
+  console.log(loc);
+  console.log(loc.lat());
+  console.log(loc.lng());
+  var point = new Parse.GeoPoint({
+    latitude: loc.lat(),
+    longitude: loc.lng()
+  });
+  var query = new Parse.Query(Listing);
+  query.near('location', point);
+  query.find({
+    success: function(places) {
+      fill_listings(places, cb);
+    }
+  });
 }

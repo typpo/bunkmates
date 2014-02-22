@@ -52,12 +52,12 @@ $(function() {
         load_listing(query);
         break;
       default:
-        fill_listings();
+        get_all_listings();
         $('#listings').removeClass('hidden');
         break;
     }
   }
-  fill_listings(runhash);
+  get_all_listings(runhash);
 
   /**************** Bind all actions here **************/
   $('#login').on('click', fblogin);
@@ -72,6 +72,15 @@ $(function() {
   });
   $('#hotel_name').on('keyup', function() {
     hotel_input();
+  });
+  var autocomplete = new google.maps.places.Autocomplete($('#places_auto')[0]);
+  google.maps.event.addListener(autocomplete, 'place_changed', function() {
+    var place = autocomplete.getPlace();
+    if (!place.geometry) {
+      alert('can\'t geocode this place :(');
+      return;
+    }
+    filter_results(place.geometry.location);
   });
 });
 
