@@ -1,17 +1,22 @@
 var Listing = Parse.Object.extend("Listing");
 
+var selected_hotel_info = {};
+
 function submit_listing() {
   var hotel_name = $('#hotel_name').val();
   var price = parseFloat($('#charge').val());
   var desc = $('#user_desc').val();
 
   var listing = new Listing();
+  var eid = selected_hotel_info._source ? selected_hotel_info._source.id : '';
 
   var proceed = function() {
     console.log('proceeding');
     FB.api('/me', function(resp) {
       // SAVE THE LISTING
       listing.save({
+        id: selected_hotel_info._id,
+        eid: eid,
         hotel: hotel_name,
         price: price,
         desc: desc,
@@ -85,12 +90,13 @@ function hotel_input() {
       }
       html = [];
       for (i in data.hits.hits) {
-        html.push('<li>' + data.hits.hits[i]._source.Name + '</li>');
+        html.push('<li hit="' + i + '">' + data.hits.hits[i]._source.Name + '</li>');
       }
       $dropdown.html(html.join(''));
       $('#hotel_dropdown li').on('click', function() {
         var $li = $(this);
         $('#hotel_name').val($li.html());
+        selected_hotel_info = data.hits.hits[$li.attr('hit')];
         $dropdown.html('');
         $dropdown.fadeOut(100);
       });
