@@ -16,6 +16,7 @@ function submit_listing() {
         price: price,
         desc: desc,
         name: resp.first_name + ' ' + resp.last_name,
+        first_name: resp.first_name,
         fb_id: resp.id,
         host_email: resp.email,
         host_gender: resp.gender,
