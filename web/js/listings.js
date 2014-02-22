@@ -25,6 +25,5 @@ function submit_listing() {
       alert('Fail');
     }
   });
-
-
+  return false;
 }
