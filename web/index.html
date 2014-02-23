@@ -25,7 +25,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Bunkmates</a>
+      <a class="navbar-brand" href="#">Bunk|Mates</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -52,19 +52,19 @@
 <!------------------------------------------- MAIN LISTING / SEARCH VIEW --------- -->
   <div id="listings" class="slide">
     <div class="container">
-      <p class="lead">
-        Stay at nice hotels for cheap.
-      </p>
+      <p class="lead centered"><em>
+        Share a Room,<br>Save some Money!
+      </em></p>
       <div class="row">
-          <div class="col-xs-2">
-            <button id="login" class="btn">Log me in ;)</button>
-          </div>
-          <div class="col-xs-3">
-            <button id="create_new_listing" class="btn">Create a new listing</button>
+          <!-- <div class="col-xs-2">
+             <button id="login" class="btn btn-primary">Sign In</button>
+          </div> -->
+          <div class="col-xs-6">
+            <button id="create_new_listing" class="btn btn-primary">List your Bed</button>
           </div>
           <div class="col-xs-6">
-            <div class="form-group">
-              <input id="places_auto" class="input-lg form-control" />
+            <div class="form-group" style="clear:left;">
+              <input id="places_auto" class="input form-control" />
             </div>
           </div>
       </div>
@@ -129,6 +129,7 @@
 <script type="text/javascript" src="js/main.js"></script>
 <script type="text/javascript" src="js/accounts.js"></script>
 <script type="text/javascript" src="js/listings.js"></script>
+<script type="text/javascript" src="lib/tmpl.js"></script>
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true"></script>
 
 <div id="fb-root"></div>
@@ -145,27 +146,28 @@
 <script type="text/html" id="listing_tmpl">
   <div class="listing">
 
-    <img src="https://graph.facebook.com/<%= listing.attributes.fb_id %>/picture"/>
-    <%= listing.attributes.first_name %> wants to share a room at
+    <img src="https://graph.facebook.com/<%= listing.attributes.fb_id %>/picture" class="fb_pic"/>
+    <span style="font-size: 14px; font-style: italic; color: #999;"><%= listing.attributes.first_name %> wants to share a room at</span>
 
     <div style="margin-left: 65px;">
-      <div style="font-size: 30px; font-weight:bold">
-        <a href="#listing?<%= listing.id %>"><%= listing.attributes.hotel %></a></span>
-        <br>
+      <div>
+        <a href="#listing?<%= listing.id %>" style="text-transform: uppercase;"><%= listing.attributes.hotel %></a></span>
+        <br><span style="font-size:12px; font-weight:600;">
         <%= listing.attributes.rating %>-star
+        </span>
         <br>
-        <span style="font-size: 25px; font-weight: bold;">$<%= listing.attributes.price %>
+        <span style="font-size: 25px; font-weight: bold; float: right; margin-right: 10px;">$<%= listing.attributes.price %>
       </div>
       <span style="font-size: 12px">
         <%= listing.attributes.address %>
       </span>
-      <p>
+      <p style="font-size:14px; color: #666;">
       "<em><%= listing.attributes.desc %></em>"
       </p>
     </div>
     <div>
       <center>
-      <img src="<%= listing.attributes.img %>" class="img-rounded img-responsive"/>
+      <img src="<%= listing.attributes.img %>" class="img-responsive"/>
       </center>
     </div>
   </div>
@@ -174,7 +176,7 @@
 <script type="text/html" id="listing_desc_tmpl">
   <h4>Stay at <%= listing.attributes.hotel %> for cheap!</h4>
   <p>
-  <img src="<%= listing.attributes.img %>" class="img-rounded img-responsive" />
+  <img src="<%= listing.attributes.img %>" class="img-responsive" />
   <%= listing.attributes.rating %>-star
   <br>
   <%= listing.attributes.address %>

@@ -2,22 +2,9 @@
 
 Parse.initialize("eYl06p1bCOWl7oInD4z6MTtNuNJGkAeC8vRWMB3b", "WMyuYm1Wmb9NtbzkgNQdq1UyYZfeOQJ5ZDVhRLme");
 
-/*
-var TestObject = Parse.Object.extend("TestObject");
-var testObject = new TestObject();
-  testObject.save({foo: "bar"}, {
-  success: function(object) {
-    $(".success").show();
-  },
-  error: function(model, error) {
-    $(".error").show();
-  }
-});
-*/
 window.fbAsyncInit = function() {
   // Nav setup
   new FastClick(document.body);
-
   Parse.FacebookUtils.init({
     appId      : '586631808094294', // Facebook App ID
     //channelUrl : '//WWW.YOUR_DOMAIN.COM/channel.html', // Channel File
@@ -25,9 +12,6 @@ window.fbAsyncInit = function() {
     cookie     : true, // enable cookies to allow Parse to access the session
     xfbml      : true  // parse XFBML
   });
-
-
-
 };
 
 $(function() {
@@ -86,39 +70,3 @@ $(function() {
     filter_results(place.geometry.location);
   });
 });
-
-// Simple JavaScript Templating
-// John Resig - http://ejohn.org/ - MIT Licensed
-window.tmpl = null;
-(function(window){
-  var cache = {};
-  window.tmpl = function tmpl(str, data){
-    // Figure out if we're getting a template, or if we need to
-    // load the template - and be sure to cache the result.
-    var fn = !/\W/.test(str) ?
-      cache[str] = cache[str] ||
-        tmpl(document.getElementById(str).innerHTML) :
-
-      // Generate a reusable function that will serve as a template
-      // generator (and which will be cached).
-      new Function("obj",
-        "var p=[],print=function(){p.push.apply(p,arguments);};" +
-
-        // Introduce the data as local variables using with(){}
-        "with(obj){p.push('" +
-
-        // Convert the template into pure JavaScript
-        str
-          .replace(/[\r\t\n]/g, " ")
-          .split("<%").join("\t")
-          .replace(/((^|%>)[^\t]*)'/g, "$1\r")
-          .replace(/\t=(.*?)%>/g, "',$1,'")
-          .split("\t").join("');")
-          .split("%>").join("p.push('")
-          .split("\r").join("\\'")
-      + "');}return p.join('');");
-
-    // Provide some basic currying to the user
-    return data ? fn( data ) : fn;
-  };
-})(window);
