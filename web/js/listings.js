@@ -136,17 +136,23 @@ function hotel_input() {
           $charge.val(cost);
         }
         var $rooms = $('#room_types');
-        var html = [];
+        var html = ['<option value="-1">No room type recognized</option>'];
         for (var i in selected_hotel_info._source.rooms) {
           var room = selected_hotel_info._source.rooms[i];
-          html.push('<li hit="' + i + '">' + room.RoomTypeName + '</li>');
+          html.push('<option value="' + i + '">' + room.RoomTypeName + '</option>');
         }
         var $roomblock = $('#room_block');
         $roomblock.removeClass('hidden');
+        $('#room_types').removeClass('hidden');
         $rooms.html(html.join(''));
-        $('#room_types li').on('click', function() {
-          selected_room_type = selected_hotel_info._source.rooms[$(this).attr('hit')]
-          $('#selected_room').html(selected_room_type.RoomTypeName);
+        $('#room_types').on('change', function() {
+          var hit = $('#room_types').val();
+          if (hit != '-1') {
+            selected_room_type = selected_hotel_info._source.rooms[hit]
+            //$('#selected_room').html(selected_room_type.RoomTypeName);
+          } else {
+            selected_room_type = {};
+          }
           $roomblock.addClass('hidden');
         });
         $dropdown.html('');
