@@ -141,10 +141,13 @@ function hotel_input() {
           var room = selected_hotel_info._source.rooms[i];
           html.push('<li hit="' + i + '">' + room.RoomTypeName + '</li>');
         }
+        var $roomblock = $('#room_block');
+        $roomblock.removeClass('hidden');
         $rooms.html(html.join(''));
         $('#room_types li').on('click', function() {
           selected_room_type = selected_hotel_info._source.rooms[$(this).attr('hit')]
           $('#selected_room').html(selected_room_type.RoomTypeName);
+          $roomblock.addClass('hidden');
         });
         $dropdown.html('');
         $dropdown.fadeOut(100);
@@ -245,7 +248,7 @@ function load_listing(id) {
     console.log('mutualfriends');
     if (Parse.User.current()) {
       var call_fb_api = function() {
-        FB.api('/me/mutualfriends/' + listing._serverData.fb_id, function(resp) {
+        FB.api('/me/mutualfriends/' + listing.attributes.host_fb_id, function(resp) {
           if (!resp || !resp.data || !resp.data.length) {
             $('#mutual_friends').addClass('hidden');
           } else {

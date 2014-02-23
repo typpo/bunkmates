@@ -22,20 +22,26 @@ function load_txn() {
   q.get(txn_id, {
     success: function(txn) {
       global_txn = txn;
-      if (txn.attributes.state != 'PENDING_APPROVAL') {
-        alert('Error: Can\'t ask for approval.  Transaction state is ' + txn.attributes.state);
-        return;
-
-      }
       var q2 = new Parse.Query(Listing);
       q2.get(txn.attributes.listing.id, {
         success: function(listing) {
           global_listing = listing;
           $(function() {
-            $('#info').html(tmpl('txn_info_tmpl', {
-              txn: txn,
-              listing: listing
-            }));
+            if (txn.attributes.state == 'CONFIRMED') {
+              $('#info').html(tmpl('txn_review_tmpl', {
+                txn: txn,
+                listing: listing
+              }));
+              $('.review').removeClass('hidden');
+            } else if (txn.attributes.state == 'PENDING_APPROVAL') {
+              $('#info').html(tmpl('txn_info_tmpl', {
+                txn: txn,
+                listing: listing
+              }));
+              $('.accept_reject').removeClass('hidden');
+            } else {
+              alert('Error: Can\'t ask for approval.  Transaction state is ' + txn.attributes.state);
+            }
           });
         },
         error: function(obj, err) {

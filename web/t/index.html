@@ -16,7 +16,7 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <a class="navbar-brand" href="/">Bunkmates</a>
+      <a class="navbar-brand" href="/">Bunk|Mates</a>
     </div>
   </div><!-- /.container-fluid -->
 </nav>
@@ -26,7 +26,7 @@
       <div id="info">
         Loading bunkmate request info...
       </div>
-      <div class="row accept_reject">
+      <div class="row accept_reject hidden">
         <div class="col-xs-6">
           <button id="accept_request" class="btn btn-primary col-xs-12">Yes, let's bunk!</button>
         </div>
@@ -73,6 +73,15 @@
   View <%= txn.attributes.guest_first_name %>'s profile</a>
 </p>
 </span>
+</script>
+
+<script type="text/html" id="txn_review_tmpl">
+<p class="lead">
+Please submit a review of your stay.
+</p>
+<p>
+
+</p>
 </script>
 
 </body>

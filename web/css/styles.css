@@ -140,3 +140,21 @@ a {
 #mutual_friend_count {
   font-size: 24px;
 }
+
+#hotel_dropdown li {
+  list-style-type: none;
+  cursor: pointer;
+  padding: 10px;
+  margin-left: -40px;
+  background-color: #FFF;
+  border-bottom: 1px solid #CCC;
+}
+
+#room_types li {
+  list-style-type: none;
+  cursor: pointer;
+  padding: 10px;
+  margin-left: -40px;
+  background-color: #FFF;
+  border-bottom: 1px solid #CCC;
+}

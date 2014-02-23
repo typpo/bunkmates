@@ -11,13 +11,14 @@ var Listing = Parse.Object.extend("Listing");
 var Transaction = Parse.Object.extend("Transaction");
 var Review = Parse.Object.extend("Review");
 var to_be_reviewed = [];
-if (Parse.User.current())
+if (Parse.User.current()) {
   load_reviews();
+}
 
 function fblogin(cb) {
   Parse.FacebookUtils.logIn('email, user_friends', {
     success: function(user) {
-      load_reviews()
+      //load_reviews()
       if (!user.existed()) {
         //alert("User signed up and logged in through Facebook!");
         cb && cb(true);
@@ -40,15 +41,17 @@ function load_reviews() {
   var listings = new Parse.Query(Listing);
   transactions.equalTo('user', user);
   transactions.equalTo('state', 'COMPLETE');
-  transactions.equalTo('reviewed', false);
+  //transactions.equalTo('reviewed', false);
   listings.equalTo('user', user);
   listings.equalTo('state', 'COMPLETE');
-  listings.equalTo('reviewed', false);
+  //listings.equalTo('reviewed', false);
   // ewww
   transactions.find({
     success: function(results) {
+      console.log('load reviews txn results', results);
       listings.find({
         success: function(results) {
+          console.log('listing txn results', results);
           for (var i in results) {
             var guest = results[i].guest;
             if (guest)
