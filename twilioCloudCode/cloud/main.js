@@ -44,7 +44,7 @@ Parse.Cloud.define('sendMeetupInfo', function(request, response) {
   q.equalTo('objectId', txn_id);
   q.find({
     success: function(txns) {
-      var txn = txns;
+      var txn = txns[0];
       console.log('txn', txn);
       console.log(txn);
       console.log('attrs', txn.attributes);
