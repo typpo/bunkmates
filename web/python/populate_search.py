@@ -1,7 +1,7 @@
 import csv
 import json
 
-def fillES(inFile, images, rooms):
+def fillES(inFile, images):
   with open(inFile, 'r') as csvFile:
       csvDict = csv.DictReader(csvFile, delimiter="|")
       with open('../../expedia/OhGod.json', 'w') as jsonFile:
