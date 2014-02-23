@@ -22,10 +22,12 @@ function load_txn() {
   console.log('Querying', txn_id);
   q.get(txn_id, {
     success: function(txn) {
+      console.log('success 1');
       global_txn = txn;
       var q2 = new Parse.Query(Listing);
       q2.get(txn.attributes.listing.id, {
         success: function(listing) {
+      console.log('success 2');
           global_listing = listing;
           $(function() {
             if (txn.attributes.state == 'CONFIRMED') {
