@@ -14,6 +14,7 @@ if (!document.location.search || document.location.search.length < 2) {
 }
 
 var global_txn;
+var global_listing;
 
 function load_txn() {
   var q = new Parse.Query(Transaction);
@@ -29,6 +30,7 @@ function load_txn() {
       var q2 = new Parse.Query(Listing);
       q2.get(txn.attributes.listing.id, {
         success: function(listing) {
+          global_listing = listing;
           $(function() {
             $('#info').html(tmpl('txn_info_tmpl', {
               txn: txn,
@@ -91,22 +93,35 @@ function accept_request() {
 
 function reject_request() {
   $('.accept_reject').hide();
-  var txn = new Transaction();
-  txn.save({
-    id: txn_id,
-    state: 'REJECTED'
+  Parse.Cloud.run('sendRejection', {
+    // Stupid parse workaround
+    listing: {
+      host_name: global_listing.attributes.host_name
+    },
+    txn: {
+      guest_name: global_txn.attributes.guest_name,
+      guest_phone: global_txn.attributes.guest_phone
+    }
   }, {
     success: function() {
-      alert('The request has been rejected.');
-      // TODO send rejection SMS
+      var txn = new Transaction();
+      txn.save({
+        id: txn_id,
+        state: 'REJECTED'
+      }, {
+        success: function() {
+          alert('The request has been rejected.');
+        },
+        error: function(obj, err) {
+          alert("Error :( " + err.message);
+        }
+      });  // end txn.save
     },
     error: function(obj, err) {
-      alert("Error :( " + err.message);
+      console.log(obj, err);
+      alert('Error: ' + err.message);
     }
   });
-
-  return false;
-
   return false;
 }
 

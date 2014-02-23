@@ -6,7 +6,7 @@ def fillES(inFile, images, rooms):
       csvDict = csv.DictReader(csvFile, delimiter="|")
       with open('../../expedia/HotelsBulkRooms.json', 'w') as jsonFile:
         index = {
-            "update": {
+            "index": {
               "_index": "hotels",
               "_type": "hotel"
             }
@@ -23,7 +23,7 @@ def fillES(inFile, images, rooms):
             obj["rooms"] = rooms[id]
           else:
             obj["rooms"] = []
-          index["update"]["_id"] = id
+          index["index"]["_id"] = id
           jsonFile.write( json.dumps(index) )
           jsonFile.write('\n')
           jsonFile.write( json.dumps(obj) )

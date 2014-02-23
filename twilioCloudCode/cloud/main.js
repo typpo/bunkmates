@@ -102,14 +102,10 @@ Parse.Cloud.define('sendMeetupInfo', function(request, response) {
 });
 
 Parse.Cloud.define('sendRejection', function(request, response) {
-  console.log(request.params);
-  var txn_id = request.params.txn_id;
   client.sendSms({
-      to: formatPhone(request.params.to),
+      to: formatPhone(request.params.txn.guest_phone),
       from: '+14152339929',
-      body: request.params.first_name
-              + ' wants to split a room with you!  http://bunkmates.co/t/?'
-              + request.params.listing_id,
+      body: 'Sorry, your request to split a room with ' + request.params.listing.host_name + ' was denied.'
     }, function(err, responseData) {
       if (err) {
         console.log(err);
