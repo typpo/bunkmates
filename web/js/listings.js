@@ -17,6 +17,7 @@ function submit_listing() {
     alert('We didn\'t match a hotel. Please use the autocomplete');
     return;
   }
+  $('#loading').show();
 
   var proceed = function() {
     console.log('proceeding');
@@ -55,29 +56,34 @@ function submit_listing() {
         success: function(listing) {
           // The object was saved successfully.
           // TODO some indicator of success
+          $('#loading').hide();
           alert('Your bed was listed!');
           window.location.hash = '#';
         },
         error: function(listing, error) {
           // The save failed.
           // error is a Parse.Error with an error code and description.
+          $('#loading').hide();
           alert('Sorry, something went wrong.');
         }
       });
     });
   }
 
-  FB.getLoginStatus(function(response) {
-    if (response.status === 'connected') {
-      var uid = response.authResponse.userID;
-      var accessToken = response.authResponse.accessToken;
-      proceed();
-    } else if (response.status === 'not_authorized') {
-      fblogin(proceed);
-    } else {
-      fblogin(proceed);
-    }
-   });
+  if (!fb_login_status) {
+    $('#loading').hide();
+    alert('Could not fetch your Facebook login status. Try again?');
+    return false;
+  }
+  if (fb_login_status.status === 'connected') {
+    var uid = fb_login_status.authfb_login_status.userID;
+    var accessToken = fb_login_status.authfb_login_status.accessToken;
+    proceed();
+  } else if (fb_login_status.status === 'not_authorized') {
+    fblogin(proceed);
+  } else {
+    fblogin(proceed);
+  }
   return false;
 }
 
@@ -171,7 +177,7 @@ function submit_request() {
     alert('Invalid phone number');
     return;
   }
-
+  $('#loading').show();
   var proceed = function() {
     console.log('proceeding');
     FB.api('/me', function(resp) {
@@ -202,9 +208,11 @@ function submit_request() {
           };
           Parse.Cloud.run('sendRequest', params, {
             success: function(result) {
+              $('#loading').hide();
               alert('Your request was sent!');
             },
             error: function(error) {
+              $('#loading').hide();
             }
           });
           window.location.hash = '#';
@@ -212,23 +220,28 @@ function submit_request() {
         error: function(listing, error) {
           // The save failed.
           // error is a Parse.Error with an error code and description.
+          $('#loading').hide();
           alert('Sorry, something went wrong.');
         }
       });
     });
   }
 
-  FB.getLoginStatus(function(response) {
-    if (response.status === 'connected') {
-      var uid = response.authResponse.userID;
-      var accessToken = response.authResponse.accessToken;
-      proceed();
-    } else if (response.status === 'not_authorized') {
-      fblogin(proceed);
-    } else {
-      fblogin(proceed);
-    }
-   });
+  if (!fb_login_status) {
+    $('#loading').hide();
+    alert('Could not fetch your Facebook login status. Try again?');
+    return false;
+  }
+  if (fb_login_status.status === 'connected') {
+    var uid = fb_login_status.authfb_login_status.userID;
+    var accessToken = fb_login_status.authfb_login_status.accessToken;
+    proceed();
+  } else if (fb_login_status.status === 'not_authorized') {
+    fblogin(proceed);
+  } else {
+    fblogin(proceed);
+  }
+  return false;
 }
 
 function hotel_selected() {
@@ -251,7 +264,6 @@ function load_listing(id) {
   }));
 
   $(function() {
-    console.log('mutualfriends');
     if (Parse.User.current()) {
       var call_fb_api = function() {
         FB.api('/me/mutualfriends/' + listing.attributes.host_fb_id, function(resp) {

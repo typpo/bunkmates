@@ -27,9 +27,24 @@ function fblogin(cb) {
       }
     },
     error: function(user, error) {
+      $('#loading').hide();
       alert("Could not fully authorize you.  We require Facebook accounts to make sure you're not creepy.");
     }
   });
+}
+
+var fb_login_status;
+function getFbLoginStatus() {
+  FB.getLoginStatus(function(response) {
+    console.log('fb login status initialized');
+    fb_login_status = response;
+   });
+}
+
+if (typeof FB === 'undefined') {
+  fb_init_fns.push(getFbLoginStatus);
+} else {
+  getFbLoginStatus();
 }
 
 function load_reviews() {

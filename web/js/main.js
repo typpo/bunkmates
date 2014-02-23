@@ -30,6 +30,7 @@ $(function() {
     $('.slide').addClass('hidden');
     $('.slide').removeClass('slide-animate');
     //$('.slide').removeClass('slide-out');
+    window.scrollTo(0, 0); // reset scroll
     var hash = window.location.hash;
     var query = '';
     if (hash.indexOf('?') > -1) {

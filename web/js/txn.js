@@ -60,6 +60,7 @@ function load_txn() {
 
 function accept_request() {
   $('.accept_reject').hide();
+  $('#loading').show();
   // Send SMS
   var listing_id = global_txn.attributes.listing.id;
   var txn_attr = global_txn.attributes;
@@ -81,18 +82,21 @@ function accept_request() {
         state: 'CONFIRMED'
       }, {
         success: function() {
+          $('#loading').hide();
           alert('You got it!  Your guest has been notified and your listing has been removed.');
           // TODO update listing with guest and set state to 'CLOSED'
           global_listing.set('state', 'CLOSED');
           global_listing.save();
         },
         error: function(obj, err) {
+          $('#loading').hide();
           console.log(obj, err);
           alert("Error :( " + err.message);
         }
       });
     },
     error: function(err) {
+      $('#loading').hide();
       console.log(arguments);
       alert('Sorry, sending text failed. ' + err.message);
     }
@@ -103,6 +107,7 @@ function accept_request() {
 
 function reject_request() {
   $('.accept_reject').hide();
+  $('#loading').show();
   Parse.Cloud.run('sendRejection', {
     // Stupid parse workaround
     listing: {
@@ -120,14 +125,17 @@ function reject_request() {
         state: 'REJECTED'
       }, {
         success: function() {
+          $('#loading').hide();
           alert('The request has been rejected.');
         },
         error: function(obj, err) {
+          $('#loading').hide();
           alert("Error :( " + err.message);
         }
       });  // end txn.save
     },
     error: function(obj, err) {
+      $('#loading').hide();
       console.log(obj, err);
       alert('Error: ' + err.message);
     }
@@ -149,6 +157,7 @@ function submit_review() {
     fblogin();
     return;
   }
+  $('#loading').show();
 
   $('#submit_review').hide();
 
@@ -164,11 +173,13 @@ function submit_review() {
     review: $('#review_text').val()
   }, {
     success: function(review) {
+      $('#loading').hide();
       alert('Review submitted. Thanks!');
       // TODO mark txn as reviewed
       window.location.href = '/';
     },
     error: function(obj, err) {
+      $('#loading').hide();
       console.log(obj, err);
       alert('Error: ' + err);
     }
