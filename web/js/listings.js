@@ -175,6 +175,7 @@ function submit_request() {
           var params = {
             to: currently_viewing_listing.attributes.host_phone,
             listing_id: currently_viewing_listing.id,
+            txn_id: txn.id,
             first_name: txn.attributes.guest_first_name
           };
           Parse.Cloud.run('sendRequest', params, {

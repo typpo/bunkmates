@@ -24,7 +24,7 @@ Parse.Cloud.define('sendRequest', function(request, response) {
       from: '+14152339929',
       body: request.params.first_name
               + ' wants to split a room with you!  http://bunkmates.co/t/?'
-              + request.params.listing_id,
+              + request.params.txn_id,
     }, function(err, responseData) {
       if (err) {
         console.log(err);
