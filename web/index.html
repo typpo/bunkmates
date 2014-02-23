@@ -84,6 +84,10 @@
         </ul>
       </p>
       <p>
+        <p id="selected_room"> </p>
+        <ul id="room_types">
+        </ul>
+      <p>
         I'm charging $ (USD)
         <input id="charge" type="number" class="input-lg form-control" placeholder="40" value="" style="width:6em"/> per night
       </p>
@@ -161,6 +165,11 @@ document.body.appendChild(script);
       <span style="font-size: 12px">
         <%= listing.attributes.address %>
       </span>
+      <% if (listing.attributes.room) { %>
+      <span style="font-size: 12px">
+        <%= listing.attributes.room.RoomTypeName %>
+      </span>
+      <% } %>
       <p style="font-size:14px; color: #666;">
       "<em><%= listing.attributes.desc %></em>"
       </p>
