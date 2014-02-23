@@ -63,9 +63,13 @@
 <%= txn.attributes.guest_first_name %> wants to bunk with you for $<%= listing.attributes.price %>!
 </p>
 <p>
-<img src="https://graph.facebook.com/<%= txn.attributes.guest_fb_id %>/picture?type=square"/>
+<img src="https://graph.facebook.com/<%= txn.attributes.guest_fb_id %>/picture?type=large"/>
 <%= txn.attributes.guest_name %> says
 "<em><%= txn.attributes.guest_desc %></em>"
+</p>
+<p>
+  <a href="http://facebook.com/<%= txn.attributes.guest_fb_id %>" target="_blank">
+  View <%= txn.attributes.guest_first_name %>'s profile</a>
 </p>
 </script>
 
