@@ -1,5 +1,5 @@
 body {
-    background-color: #ddd;
+    background-color: #eee;
     text-align: center;
     /*padding: 0 25px;*/
     margin-top: 53px;
@@ -90,6 +90,8 @@ body {
   border-radius: 100px!important;
   border: 2px solid #DDD;
   margin-right: 10px;
+  margin-left: 5px;
+  margin-top: 5px;
 }
 
 .hotel_name {
