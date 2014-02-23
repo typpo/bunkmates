@@ -15,7 +15,7 @@ if (Parse.User.current())
   load_reviews();
 
 function fblogin(cb) {
-  Parse.FacebookUtils.logIn('email', {
+  Parse.FacebookUtils.logIn('email, user_friends', {
     success: function(user) {
       load_reviews()
       if (!user.existed()) {
