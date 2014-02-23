@@ -17,6 +17,7 @@ function submit_listing() {
     alert('We didn\'t match a hotel. Please use the autocomplete');
     return;
   }
+  $('#loading').show();
 
   var proceed = function() {
     console.log('proceeding');
@@ -55,12 +56,14 @@ function submit_listing() {
         success: function(listing) {
           // The object was saved successfully.
           // TODO some indicator of success
+          $('#loading').hide();
           alert('Your bed was listed!');
           window.location.hash = '#';
         },
         error: function(listing, error) {
           // The save failed.
           // error is a Parse.Error with an error code and description.
+          $('#loading').hide();
           alert('Sorry, something went wrong.');
         }
       });
@@ -171,7 +174,7 @@ function submit_request() {
     alert('Invalid phone number');
     return;
   }
-
+  $('#loading').show();
   var proceed = function() {
     console.log('proceeding');
     FB.api('/me', function(resp) {
@@ -202,9 +205,11 @@ function submit_request() {
           };
           Parse.Cloud.run('sendRequest', params, {
             success: function(result) {
+              $('#loading').hide();
               alert('Your request was sent!');
             },
             error: function(error) {
+              $('#loading').hide();
             }
           });
           window.location.hash = '#';
@@ -212,6 +217,7 @@ function submit_request() {
         error: function(listing, error) {
           // The save failed.
           // error is a Parse.Error with an error code and description.
+          $('#loading').hide();
           alert('Sorry, something went wrong.');
         }
       });
@@ -251,7 +257,6 @@ function load_listing(id) {
   }));
 
   $(function() {
-    console.log('mutualfriends');
     if (Parse.User.current()) {
       var call_fb_api = function() {
         FB.api('/me/mutualfriends/' + listing.attributes.host_fb_id, function(resp) {

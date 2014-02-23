@@ -27,6 +27,7 @@ $(function() {
   function runhash() {
     console.log('Hash changed');
     $('.slide').addClass('hidden');
+    window.scrollTo(0, 0); // reset scroll
     var hash = window.location.hash;
     var query = '';
     if (hash.indexOf('?') > -1) {
