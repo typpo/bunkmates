@@ -170,7 +170,7 @@ function hotel_input() {
 function submit_request() {
   var txn = new Transaction();
   var guest_desc = $('#guest_desc').val();
-  var phone = prompt('Please enter your phone number.');
+  var phone = $('#guest_phone').val();
   if (!phone) {
     alert('Invalid phone number');
     return;

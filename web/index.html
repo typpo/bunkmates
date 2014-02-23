@@ -219,6 +219,10 @@ You and <%= listing.attributes.host_first_name %> have <b><div id="mutual_friend
     Tell <%= listing.attributes.host_first_name %> about yourself:
     <textarea id="guest_desc" class="form-control" rows="4"></textarea>
   </p>
+  <p class="form_label">
+    Your phone number:<br>
+    <input id="guest_phone" type="tel" class="input-lg form-control" style="width:10em"/>
+  </p>
   <p style="font-size:14px;">
     We'll contact <%= listing.attributes.host_first_name %> to let <%= listing.attributes.host_gender == 'male' ? 'him' : 'her' %> know you want to share a room.
   </p>
