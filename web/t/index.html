@@ -60,7 +60,7 @@
 
 <script type="text/html" id="txn_info_tmpl">
 <p class="lead">
-<%= txn.attributes.guest_first_name %> wants to bunk with you for $<%= txn.attributes.listing.attributes.price %>!
+<%= txn.attributes.guest_first_name %> wants to bunk with you for $<%= listing.attributes.price %>!
 </p>
 <p>
 <img src="https://graph.facebook.com/<%= txn.attributes.guest_fb_id %>/picture?type=square"/>

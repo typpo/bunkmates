@@ -39,44 +39,32 @@ Parse.Cloud.define('sendRequest', function(request, response) {
 });
 
 Parse.Cloud.define('sendMeetupInfo', function(request, response) {
-  var txn_id = request.params.txn_id;
-  var q = new Parse.Query(Transaction);
-  q.equalTo('objectId', txn_id);
-  q.find({
-    success: function(txns) {
-      var txn = txns;
-      console.log('txn', txn);
-      console.log(txn);
-      console.log('attrs', txn.attributes);
-      console.log('gender', txn.guest_gender);
-      console.log('txn listing', txn.listing);
-      var q2 = new Parse.Query(Listing);
-      q2.equalTo('objectId', txn.listing.objectId);
-      q2.find({
-        sucess: function(listings) {
-          var listing = listings[0];
-          console.log('listing', listing);
-          // NOTE the query/object model API on Parse Cloud is subtly different
-          // from on frontend - everything is top-level, ie. no 'attributes' key,
-          // and id is named objectId (like mongo)
-          sendsms(listing.host_phone, txn.guest_phone);
-          response.success();
-        },
-        error: function(obj, err) {
-          console.log(obj, err);
-          response.error('Error: ' + err);
-        }
-      });
+  /*
+  var txn = request.params.txn;
+  var listing = request.params.listing;
+  sendsms(listing.host_phone, txn.guest_phone);
+  */
+  var txn = request.params.txn;
+  var listing_id = request.params.listing_id;
+  var q2 = new Parse.Query(Listing);
+  q2.get(listing_id, {
+    success: function(listing) {
+      console.log('listing' + listing);
+      // NOTE the query/object model API on Parse Cloud is subtly different
+      // from on frontend - everything is top-level, ie. no 'attributes' key,
+      // and id is named objectId (like mongo)
+      sendsms(listing.attributes.host_phone, txn.guest_phone);
+      response.success();
     },
     error: function(obj, err) {
       console.log(obj, err);
-      response.error('Error: ' + err);
+      response.error('Error: ' + err.message);
     }
   });
 
 
   function sendsms(host_number, guest_number) {
-    console.log('Sending meetup text to', host_number, guest_number);
+    console.log('Sending meetup text to ' + host_number + ',' +  guest_number);
     // SMS to host
     client.sendSms({
         to: formatPhone(host_number),
@@ -114,14 +102,10 @@ Parse.Cloud.define('sendMeetupInfo', function(request, response) {
 });
 
 Parse.Cloud.define('sendRejection', function(request, response) {
-  console.log(request.params);
-  var txn_id = request.params.txn_id;
   client.sendSms({
-      to: formatPhone(request.params.to),
+      to: formatPhone(request.params.txn.guest_phone),
       from: '+14152339929',
-      body: request.params.first_name
-              + ' wants to split a room with you!  http://bunkmates.co/t/?'
-              + request.params.listing_id,
+      body: 'Sorry, your request to split a room with ' + request.params.listing.host_name + ' was denied.'
     }, function(err, responseData) {
       if (err) {
         console.log(err);

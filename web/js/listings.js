@@ -40,10 +40,11 @@ function submit_listing() {
         hotel: hotel_name,
         price: price,
         desc: desc,
-        name: resp.first_name + ' ' + resp.last_name,
-        first_name: resp.first_name,
-        last_name: resp.last_name,
-        fb_id: resp.id,
+        // TODO prepend with host
+        host_name: resp.first_name + ' ' + resp.last_name,
+        host_first_name: resp.first_name,
+        host_last_name: resp.last_name,
+        host_fb_id: resp.id,
         host_email: resp.email,
         host_gender: resp.gender,
         host_phone: phone,
@@ -144,7 +145,10 @@ function submit_request() {
   var txn = new Transaction();
   var guest_desc = $('#guest_desc').val();
   var phone = prompt('Please enter your phone number.');
-  if (!phone) return;
+  if (!phone) {
+    alert('Invalid phone number');
+    return;
+  }
 
   var proceed = function() {
     console.log('proceeding');
@@ -223,17 +227,20 @@ function load_listing(id) {
     listing: listing
   }));
 
-  if (Parse.User.current()) {
-    FB.api('/me/mutualfriends/' + listing._serverData.fb_id, function(resp) {
-      if (!resp || !resp.data || !resp.data.length) {
-        $('#mutual_friends').addClass('hidden');
-      } else {
-        $('#mutual_friends').removeClass('hidden');
-        $('#mutual_friend_count').html(resp.data.length);
-      }
-    });
-  }
-}
+  $(function() {
+    console.log('mutualfriends');
+    if (Parse.User.current()) {
+      FB.api('/me/mutualfriends/' + listing._serverData.fb_id, function(resp) {
+        if (!resp || !resp.data || !resp.data.length) {
+          $('#mutual_friends').addClass('hidden');
+        } else {
+          $('#mutual_friends').removeClass('hidden');
+          $('#mutual_friend_count').html(resp.data.length);
+        }
+      });
+    }
+  });
+} // end load_listing
 
 function filter_results(loc, cb) {
   console.log(loc);
