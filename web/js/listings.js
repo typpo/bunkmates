@@ -76,8 +76,9 @@ function submit_listing() {
     return false;
   }
   if (fb_login_status.status === 'connected') {
-    var uid = fb_login_status.authfb_login_status.userID;
-    var accessToken = fb_login_status.authfb_login_status.accessToken;
+    var login = fb_login_status.authResponse || fb_login_status.authfb_login_status;
+    var uid = login.userID;
+    var accessToken = login.accessToken;
     proceed();
   } else if (fb_login_status.status === 'not_authorized') {
     fblogin(proceed);
@@ -142,13 +143,11 @@ function hotel_input() {
           $charge.val(cost);
         }
         var $rooms = $('#room_types');
-        var html = ['<option value="-1">No room type recognized</option>'];
+        var html = ['<option value="-1">Select your room type</option>'];
         for (var i in selected_hotel_info._source.rooms) {
           var room = selected_hotel_info._source.rooms[i];
           html.push('<option value="' + i + '">' + room.RoomTypeName + '</option>');
         }
-        var $roomblock = $('#room_block');
-        $roomblock.removeClass('hidden');
         $('#room_types').removeClass('hidden');
         $rooms.html(html.join(''));
         $('#room_types').on('change', function() {
@@ -159,7 +158,6 @@ function hotel_input() {
           } else {
             selected_room_type = {};
           }
-          $roomblock.addClass('hidden');
         });
         $dropdown.html('');
         $dropdown.fadeOut(100);
