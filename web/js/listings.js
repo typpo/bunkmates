@@ -4,6 +4,7 @@ var Listing = Parse.Object.extend("Listing");
 var Transaction = Parse.Object.extend("Transaction");
 
 var selected_hotel_info = {};
+var selected_room_type = {};
 
 function submit_listing() {
   var hotel_name = $('#hotel_name').val();
@@ -37,6 +38,7 @@ function submit_listing() {
         address: selected_hotel_info._source.Address1 + selected_hotel_info._source.Address2,
         img: selected_hotel_info._source.img,
         rating: selected_hotel_info._source.StarRating,
+        room: selected_room_type,
         hotel: hotel_name,
         price: price,
         desc: desc,
@@ -133,6 +135,17 @@ function hotel_input() {
                                   parseFloat(selected_hotel_info._source.LowRate)) / 4);
           $charge.val(cost);
         }
+        var $rooms = $('#room_types');
+        var html = [];
+        for (var i in selected_hotel_info._source.rooms) {
+          var room = selected_hotel_info._source.rooms[i];
+          html.push('<li hit="' + i + '">' + room.RoomTypeName + '</li>');
+        }
+        $rooms.html(html.join(''));
+        $('#room_types li').on('click', function() {
+          selected_room_type = selected_hotel_info._source.rooms[$(this).attr('hit')]
+          $('#selected_room').html(selected_room_type.RoomTypeName);
+        });
         $dropdown.html('');
         $dropdown.fadeOut(100);
       });
