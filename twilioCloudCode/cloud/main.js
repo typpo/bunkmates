@@ -41,14 +41,20 @@ Parse.Cloud.define('sendRequest', function(request, response) {
 Parse.Cloud.define('sendMeetupInfo', function(request, response) {
   var txn_id = request.params.txn_id;
   var q = new Parse.Query(Transaction);
-  q.get(txn_id, {
-    success: function(txn) {
+  q.equalTo('objectId', txn_id);
+  q.find({
+    success: function(txns) {
+      var txn = txns;
       console.log('txn', txn);
       console.log(txn);
+      console.log('attrs', txn.attributes);
+      console.log('gender', txn.guest_gender);
       console.log('txn listing', txn.listing);
       var q2 = new Parse.Query(Listing);
-      q2.get(txn.listing.objectId, {
-        sucess: function(listing) {
+      q2.equalTo('objectId', txn.listing.objectId);
+      q2.find({
+        sucess: function(listings) {
+          var listing = listings[0];
           console.log('listing', listing);
           // NOTE the query/object model API on Parse Cloud is subtly different
           // from on frontend - everything is top-level, ie. no 'attributes' key,
