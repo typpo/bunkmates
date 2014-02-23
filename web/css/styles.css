@@ -6,7 +6,7 @@ body {
 }
 
 .container {
-    background-color: #fff;
+    background-color: #eee;
     padding-top: 20px;
     padding-bottom: 20px;
     width: 100%;
@@ -14,21 +14,23 @@ body {
 }
 
 .listing {
-  border: 1px solid #aaa;
-  padding: 25px;
+  border: 1px solid #ddd;
+  padding: 5px 5px 15px 5px;
   margin-bottom: 25px;
+  background-color: #FFFFFF;
+  border-radius: 3px;
 
-  box-shadow: 0px 0px 15px #000;
-  -moz-box-shadow: 0px 0px 15px #000;
-  -webkit-box-shadow: 0px 0px 15px #000;
+  box-shadow: 0px 2px 0px rgba(0,0,0,.1);
+  -moz-box-shadow: 0px 2px 0px rgba(0,0,0,.1);
+  -webkit-box-shadow: 0px 2px 0px rgba(0,0,0,.1);
 
 }
 
 .navbar {
   border-radius: 0;
-  box-shadow: 0px 0px 15px #000;
-  -moz-box-shadow: 0px 0px 15px #000;
-  -webkit-box-shadow: 0px 0px 15px #000;
+  box-shadow: 0px 0px 5px rgba(0,0,0, 0.5);
+  -moz-box-shadow: 0px 0px 5px rgba(0,0,0, 0.5);
+  -webkit-box-shadow: 0px 0px 5px rgba(0,0,0, 0.5);
 }
 
 #main {
@@ -74,4 +76,24 @@ body {
   display: block;
 }
 
+.fb_pic {
+  border-radius: 100px!important;
+  border: 1px solid #DDD;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+}
 
+.hotel_name {
+  font-size: 16px
+  font-weight: 500
+  text-transform: uppercase;
+}
+
+a {
+  color: #007AFF;
+}
+
+.centered {
+  text-align: center;
+}
