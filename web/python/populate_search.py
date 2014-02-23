@@ -40,7 +40,7 @@ def getRooms(inFile):
         del obj['\xef\xbb\xbfEANHotelID']
         if not eid in rooms:
           rooms[eid] = []
-        obj["RoomTypeDescription"] = re.escape(obj["RoomTypeDescription"])
+        del obj["RoomTypeDescription"]
         rooms[eid].append(obj)
       print "end rooms"
       return rooms

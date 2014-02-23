@@ -26,7 +26,7 @@
       <div id="info">
         Loading bunkmate request info...
       </div>
-      <div class="row accept_reject">
+      <div class="row accept_reject hidden">
         <div class="col-xs-5">
           <button id="accept_request" class="btn btn-primary">Yes, let's bunk!</button>
         </div>
@@ -68,6 +68,12 @@
 <p>
   <a href="http://facebook.com/<%= txn.attributes.guest_fb_id %>" target="_blank">
   View <%= txn.attributes.guest_first_name %>'s profile</a>
+</p>
+</script>
+
+<script type="text/html" id="txn_review_tmpl">
+<p class="lead">
+Please submit a review of your stay.
 </p>
 </script>
 
