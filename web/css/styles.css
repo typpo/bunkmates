@@ -19,7 +19,7 @@ body {
   margin-bottom: 25px;
   background-color: #FFFFFF;
   border-radius: 3px;
-
+  cursor: pointer;
   box-shadow: 0px 2px 0px rgba(0,0,0,.1);
   -moz-box-shadow: 0px 2px 0px rgba(0,0,0,.1);
   -webkit-box-shadow: 0px 2px 0px rgba(0,0,0,.1);
@@ -139,4 +139,22 @@ a {
 
 #mutual_friend_count {
   font-size: 24px;
+}
+
+#hotel_dropdown li {
+  list-style-type: none;
+  cursor: pointer;
+  padding: 10px;
+  margin-left: -40px;
+  background-color: #FFF;
+  border-bottom: 1px solid #CCC;
+}
+
+#room_types li {
+  list-style-type: none;
+  cursor: pointer;
+  padding: 10px;
+  margin-left: -40px;
+  background-color: #FFF;
+  border-bottom: 1px solid #CCC;
 }

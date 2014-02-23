@@ -67,6 +67,10 @@ $(function() {
   $('#hotel_name').on('keyup', function() {
     hotel_input();
   });
+  $('#listings').on('click', 'div.listing', function() {
+    var $list = $(this);
+    window.location.hash = 'listing?' + $list.data('listing-id');
+  });
 
   window.gmaps_initialize = function() {
     var autocomplete = new google.maps.places.Autocomplete($('#places_auto')[0]);

@@ -141,10 +141,13 @@ function hotel_input() {
           var room = selected_hotel_info._source.rooms[i];
           html.push('<li hit="' + i + '">' + room.RoomTypeName + '</li>');
         }
+        var $roomblock = $('#room_block');
+        $roomblock.removeClass('hidden');
         $rooms.html(html.join(''));
         $('#room_types li').on('click', function() {
           selected_room_type = selected_hotel_info._source.rooms[$(this).attr('hit')]
           $('#selected_room').html(selected_room_type.RoomTypeName);
+          $roomblock.addClass('hidden');
         });
         $dropdown.html('');
         $dropdown.fadeOut(100);
