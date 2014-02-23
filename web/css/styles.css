@@ -33,6 +33,10 @@ body {
   -webkit-box-shadow: 0px 0px 5px rgba(0,0,0, 0.5);
 }
 
+.navbar-inverse {
+  background-color: #2980B9;
+}
+
 #main {
     width: 500px;
     margin: auto;
@@ -106,4 +110,20 @@ a {
   background-color: #FFFFFF;
   padding: 10px;
   border: 1px solid #DDDDDD;
+  border-radius: 3px;
+}
+
+#social {
+  background-color: #ECF0F1;
+  padding: 10px;
+  border: 1px solid #DDDDDD;
+  border-radius: 3px;
+  margin-bottom:10px;
+}
+
+#mutual_friends {
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  ;
 }
