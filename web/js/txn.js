@@ -3,6 +3,7 @@
 Parse.initialize("eYl06p1bCOWl7oInD4z6MTtNuNJGkAeC8vRWMB3b", "WMyuYm1Wmb9NtbzkgNQdq1UyYZfeOQJ5ZDVhRLme");
 
 var Transaction = Parse.Object.extend("Transaction");
+var Listing = Parse.Object.extend("Listing");
 
 var txn_id;
 if (!document.location.search || document.location.search.length < 2) {
@@ -25,10 +26,20 @@ function load_txn() {
         return;
 
       }
-      $(function() {
-        $('#info').html(tmpl('txn_info_tmpl', {
-          txn: txn
-        }));
+      var q2 = new Parse.Query(Listing);
+      q2.get(txn.attributes.listing.id, {
+        success: function(listing) {
+          $(function() {
+            $('#info').html(tmpl('txn_info_tmpl', {
+              txn: txn,
+              listing: listing
+            }));
+          });
+        },
+        error: function(obj, err) {
+          console.log(obj, err);
+          alert('Error loading your transaction: ' + err.message);
+        }
       });
     },
     error: function(obj, err) {
@@ -49,6 +60,8 @@ function accept_request() {
       guest_name: txn_attr.guest_name,
       guest_phone: txn_attr.guest_phone
     },
+    // TODO this can be cleaned up now that we have to look up this listing
+    // on the frontend anyway.
     listing_id: listing_id
   }, {
     success: function(result) {
