@@ -137,6 +137,7 @@ function submit_request() {
   var txn = new Transaction();
   var guest_desc = $('#guest_desc').val();
   var phone = prompt('Please enter your phone number.');
+  if (!phone) return;
 
   var proceed = function() {
     console.log('proceeding');
@@ -156,11 +157,12 @@ function submit_request() {
         success: function(txn) {
           // The object was saved successfully.
           // TODO some indicator of success
-          Parse.Cloud.run('sendRequest', {
-            to: currently_viewing_listing.host_phone,
+          var params = {
+            to: currently_viewing_listing.attributes.host_phone,
             listing_id: currently_viewing_listing.id,
-            first_name: txn.first_name
-          }, {
+            first_name: txn.attributes.guest_first_name
+          };
+          Parse.Cloud.run('sendRequest', params, {
             success: function(result) {
               alert('Your request was sent!');
             },
