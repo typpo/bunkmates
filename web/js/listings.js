@@ -76,9 +76,6 @@ function submit_listing() {
     return false;
   }
   if (fb_login_status.status === 'connected') {
-    var login = fb_login_status.authResponse || fb_login_status.authfb_login_status;
-    var uid = login.userID;
-    var accessToken = login.accessToken;
     proceed();
   } else if (fb_login_status.status === 'not_authorized') {
     fblogin(proceed);
@@ -136,12 +133,14 @@ function hotel_input() {
         var $li = $(this);
         $('#hotel_name').val($li.html());
         selected_hotel_info = data.hits.hits[$li.attr('hit')];
+        /*
         var $charge = $('#charge');
         if (!$charge.val()) {
           var cost = Math.floor( (parseFloat(selected_hotel_info._source.HighRate) +
                                   parseFloat(selected_hotel_info._source.LowRate)) / 4);
           $charge.val(cost);
         }
+        */
         var $rooms = $('#room_types');
         var html = ['<option value="-1">Select your room type</option>'];
         for (var i in selected_hotel_info._source.rooms) {
@@ -231,8 +230,6 @@ function submit_request() {
     return false;
   }
   if (fb_login_status.status === 'connected') {
-    var uid = fb_login_status.authfb_login_status.userID;
-    var accessToken = fb_login_status.authfb_login_status.accessToken;
     proceed();
   } else if (fb_login_status.status === 'not_authorized') {
     fblogin(proceed);
