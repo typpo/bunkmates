@@ -12,10 +12,16 @@ if (!document.location.search || document.location.search.length < 2) {
   load_txn();
 }
 
-function load_txn(txn_id) {
+function load_txn() {
   var q = new Parse.Query(Transaction);
+  console.log('Querying', txn_id);
   q.get(txn_id, {
     success: function(txn) {
+      if (txn.attributes.state != 'PENDING_APPROVAL') {
+        alert('Error: Can\'t ask for approval.  Transaction state is ' + txn.attributes.state);
+        return;
+
+      }
       $(function() {
         $('#info').html(tmpl('txn_info_tmpl', {
           txn: txn
@@ -23,7 +29,8 @@ function load_txn(txn_id) {
       });
     },
     error: function(obj, err) {
-      alert(err.message);
+      console.log(obj, err);
+      alert('Error loading your transaction: ' + err.message);
     }
   });
 }
@@ -35,9 +42,12 @@ function accept_request() {
     state: 'PENDING_MEETUP'
   }, {
     success: function() {
-      alert('You got it!  Your guest has been notified.');
+      alert('You got it!  Your guest has been notified and your listing has been removed.');
+      // TODO update listing
+      // TODO sent SMS
     },
     error: function(obj, err) {
+      console.log(obj, err);
       alert("Error :( " + err.message);
     }
   });
@@ -53,6 +63,7 @@ function reject_request() {
   }, {
     success: function() {
       alert('The request has been rejected.');
+      // TODO send rejection SMS
     },
     error: function(obj, err) {
       alert("Error :( " + err.message);
