@@ -9,8 +9,8 @@
 -->
   <link rel="stylesheet" href="http://designmodo.github.io/Flat-UI/bootstrap/css/bootstrap.css">
   <link rel="stylesheet" href="http://designmodo.github.io/Flat-UI/css/flat-ui.css">
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body>
@@ -26,16 +26,17 @@
 <!------------------------------------------- MAIN SEARCH VIEW --------- -->
   <div id="listings" class="slide">
     <div class="container">
-      <p class="lead">
-        You're on the private transaction page.
-      </p>
+      <div id="info">
+
+      </div>
     </div>
   </div>
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.16.min.js"></script>
-<script type="text/javascript" src="lib/fastclick.js"></script>
-<script type="text/javascript" src="js/txn.js"></script>
+<script type="text/javascript" src="/lib/fastclick.js"></script>
+<script type="text/javascript" src="/js/txn.js"></script>
+<script type="text/javascript" src="/lib/tmpl.js"></script>
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true"></script>
 
 <div id="fb-root"></div>
@@ -47,6 +48,25 @@
          js.src = "//connect.facebook.net/en_US/all.js";
          fjs.parentNode.insertBefore(js, fjs);
        }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<script type="text/html" id="txn_info_tmpl">
+<p class="lead">
+<%= txn.attributes.guest_first_name %> wants to bunk with you for $<%= txn.attributes.listing.attributes.price %>!
+</p>
+<p>
+<img src="https://graph.facebook.com/<%= txn.attributes.guest_fb_id %>/picture?type=square"/>
+<%= txn.attributes.guest_name %> says
+"<em><%= txn.attributes.guest_desc %></em>"
+</p>
+<div class="row">
+  <div class="col-xs-5">
+    <button id="accept_request" class="btn btn-primary">Yes, let's bunk!</button>
+  </div>
+  <div class="col-xs-5">
+    <button id="reject_request" class="btn btn-warning">No thanks</button>
+  </div>
+</div>
 </script>
 
 </body>

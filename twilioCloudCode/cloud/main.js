@@ -20,7 +20,7 @@ Parse.Cloud.define('sendRequest', function(request, response) {
       to: formatPhone(request.params.to),
       from: '+14152339929',
       body: request.params.first_name
-              + ' wants to split a room with you!  http://bunkmates.co/t/'
+              + ' wants to split a room with you!  http://bunkmates.co/t/?'
               + request.params.listing_id,
     }, function(err, responseData) {
       if (err) {
