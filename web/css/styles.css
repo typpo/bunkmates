@@ -15,7 +15,7 @@ body {
 
 .listing {
   border: 1px solid #ddd;
-  padding: 5px 5px 15px 5px;
+  padding: 5px 5px 5px 5px;
   margin-bottom: 25px;
   background-color: #FFFFFF;
   border-radius: 3px;
@@ -91,9 +91,19 @@ body {
 }
 
 a {
-  color: #007AFF;
+  color: #3498DB;
 }
 
 .centered {
   text-align: center;
+}
+
+.light_text {
+  font-weight: 100;
+}
+
+#listing_desc {
+  background-color: #FFFFFF;
+  padding: 10px;
+  border: 1px solid #DDDDDD;
 }
