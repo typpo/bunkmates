@@ -4,6 +4,7 @@ Parse.initialize("eYl06p1bCOWl7oInD4z6MTtNuNJGkAeC8vRWMB3b", "WMyuYm1Wmb9NtbzkgN
 
 var Transaction = Parse.Object.extend("Transaction");
 var Listing = Parse.Object.extend("Listing");
+var Review = Parse.Object.extend("Review");
 
 var txn_id;
 if (!document.location.search || document.location.search.length < 2) {
@@ -32,7 +33,7 @@ function load_txn() {
                 txn: txn,
                 listing: listing
               }));
-              $('.review').removeClass('hidden');
+              $('.submit_review_container').removeClass('hidden');
             } else if (txn.attributes.state == 'PENDING_APPROVAL') {
               $('#info').html(tmpl('txn_info_tmpl', {
                 txn: txn,
@@ -132,7 +133,48 @@ function reject_request() {
   return false;
 }
 
+function submit_review() {
+  // Decide who is writing the review
+  // FIXME can be spoofed
+  var is_host_user = false;
+  var this_user = Parse.User.current();
+  var host_user = global_listing.attributes.user;
+  var guest_user = global_txn.attributes.user;
+  if (this_user.id === host_user.id) {
+    is_host_user = true;
+  } else if (this_user.id !== guest_user.id) {
+    alert('You are not logged in as a user on this transaction.');
+    fblogin();
+    return;
+  }
+
+  $('#submit_review').hide();
+
+  // Create a review
+  var review = new Review();
+  review.save({
+    txn: global_txn,
+    listing: global_listing,
+    author: this_user,
+    user_reviewed: is_host_user ? guest_user : host_user,
+
+    stars: parseInt($('form input[name="stars"]:checked').val()),
+    review: $('#review_text').val()
+  }, {
+    success: function(review) {
+      alert('Review submitted. Thanks!');
+      // TODO mark txn as reviewed
+      window.location.href = '/';
+    },
+    error: function(obj, err) {
+      console.log(obj, err);
+      alert('Error: ' + err);
+    }
+  });
+}
+
 $(function() {
   $('#accept_request').on('click', accept_request);
   $('#reject_request').on('click', reject_request);
+  $('#submit_review').on('click', submit_review);
 });
