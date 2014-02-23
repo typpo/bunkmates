@@ -114,16 +114,29 @@ a {
 }
 
 #social {
-  background-color: #ECF0F1;
+  background-color: #FFFFFF;
   padding: 10px;
   border: 1px solid #DDDDDD;
   border-radius: 3px;
   margin-bottom:10px;
 }
 
+#info {
+  background-color: #FFFFFF;
+  padding: 10px;
+  border: 1px solid #DDDDDD;
+  border-radius: 3px;
+  margin-bottom:10px;
+}
+
+
 #mutual_friends {
   font-size: 14px;
   font-weight: 400;
   text-align: center;
   ;
+}
+
+#mutual_friend_count {
+  font-size: 24px;
 }

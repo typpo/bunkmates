@@ -16,7 +16,7 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <a class="navbar-brand" href="/">Bunkmates</a>
+      <a class="navbar-brand" href="/">Bunk|Mates</a>
     </div>
   </div><!-- /.container-fluid -->
 </nav>
@@ -27,11 +27,11 @@
         Loading bunkmate request info...
       </div>
       <div class="row accept_reject hidden">
-        <div class="col-xs-5">
-          <button id="accept_request" class="btn btn-primary">Yes, let's bunk!</button>
+        <div class="col-xs-6">
+          <button id="accept_request" class="btn btn-primary col-xs-12">Yes, let's bunk!</button>
         </div>
-        <div class="col-xs-5">
-          <button id="reject_request" class="btn btn-warning">No thanks</button>
+        <div class="col-xs-6">
+          <button id="reject_request" class="btn btn-warning col-xs-12">No thanks</button>
         </div>
       </div>
     </div>
@@ -56,24 +56,31 @@
 </script>
 
 <script type="text/html" id="txn_info_tmpl">
+<span style="text-align: center;">
 <p class="lead">
-<%= txn.attributes.guest_first_name %> wants to bunk with you for $<%= listing.attributes.price %>!
+<b><%= txn.attributes.guest_first_name %> wants to bunk with you for $<%= listing.attributes.price %>!</b>
 </p>
 <p>
-<img src="https://graph.facebook.com/<%= txn.attributes.guest_fb_id %>/picture?type=large"/>
-<br>
+<img src="https://graph.facebook.com/<%= txn.attributes.guest_fb_id %>/picture?type=large" class="fb_pic" style="border: 5px solid #ddd"/>
+<br><br>
 <%= txn.attributes.guest_name %> says
+<p>
 "<em><%= txn.attributes.guest_desc %></em>"
+</p>
 </p>
 <p>
   <a href="http://facebook.com/<%= txn.attributes.guest_fb_id %>" target="_blank">
   View <%= txn.attributes.guest_first_name %>'s profile</a>
 </p>
+</span>
 </script>
 
 <script type="text/html" id="txn_review_tmpl">
 <p class="lead">
 Please submit a review of your stay.
+</p>
+<p>
+
 </p>
 </script>
 

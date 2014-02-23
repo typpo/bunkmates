@@ -232,7 +232,7 @@ function load_listing(id) {
     console.log('mutualfriends');
     if (Parse.User.current()) {
       var call_fb_api = function() {
-        FB.api('/me/mutualfriends/' + listing._serverData.fb_id, function(resp) {
+        FB.api('/me/mutualfriends/' + listing.attributes.host_fb_id, function(resp) {
           if (!resp || !resp.data || !resp.data.length) {
             $('#mutual_friends').addClass('hidden');
           } else {
