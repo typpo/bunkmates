@@ -70,7 +70,8 @@ function accept_request() {
       var txn = new Transaction();
       txn.save({
         id: txn_id,
-        state: 'PENDING_MEETUP'
+        //state: 'PENDING_MEETUP'
+        state: 'CONFIRMED'
       }, {
         success: function() {
           alert('You got it!  Your guest has been notified and your listing has been removed.');
