@@ -199,6 +199,9 @@
     Tell <%= listing.attributes.host_first_name %> about yourself
     </p>
   <p>
+  <div id="mutual_friends" class="hidden">
+    You and <%= listing.attributes.first_name %> have <div id="mutual_friend_count"></div> friends in common
+  </div>
     <textarea id="guest_desc" class="form-control" rows="4">Bunk with me please!</textarea>
     <div id="mutual_friends" class="hidden"></div>
     Tell <%= listing.attributes.host_first_name %> about yourself.
