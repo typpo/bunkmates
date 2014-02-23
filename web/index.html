@@ -18,7 +18,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header" style="background-color: #2980B9;">
+    <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
@@ -30,7 +30,7 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-inverse navbar-nav">
         <li class="active"><a href="#">Link</a></li>
         <li id="please_review" class="hidden"><a href="#reviews">Please Review</a></li>
         <li class="dropdown">
@@ -52,15 +52,15 @@
 <!------------------------------------------- MAIN LISTING / SEARCH VIEW --------- -->
   <div id="listings" class="slide">
     <div class="container">
-      <p class="lead centered" style="font-size:22px"><b>
-        Share a Room, Save some Money!
+      <p class="lead centered" style="font-size:18px"><b>
+        Share a Room, Save Money
       </b></p>
       <div class="row">
           <!-- <div class="col-xs-2">
              <button id="login" class="btn btn-primary">Sign In</button>
           </div> -->
           <div class="col-xs-6">
-            <button id="create_new_listing" class="btn btn-primary">List your Bed</button>
+            <button id="create_new_listing" class="btn btn-primary">List a Bed</button>
           </div>
           <div class="col-xs-6">
             <div class="form-group" style="clear:left;">
@@ -147,7 +147,7 @@
   <div class="listing">
 
     <img src="https://graph.facebook.com/<%= listing.attributes.fb_id %>/picture" class="fb_pic"/>
-    <span style="font-size: 14px; font-style: italic; color: #999;"><%= listing.attributes.first_name %> <%= listing.attributes.last_name %> wants to share a room at</span>
+    <span style="font-size: 12px; font-style: italic; color: #999;"><%= listing.attributes.first_name %> wants to share a room at</span>
 
     <div style="margin-left: 65px;">
       <div>
@@ -174,6 +174,12 @@
 </script>
 
 <script type="text/html" id="listing_desc_tmpl">
+<div id="social">
+<div id="mutual_friends" class="hidden">
+You and <%= listing.attributes.first_name %> have <b><div id="mutual_friend_count"></div></b> friends in common
+</div>
+</div>
+
   <!-- <h4>Stay at <%= listing.attributes.hotel %> for cheap!</h4> -->
     <a href="#listing?<%= listing.id %>" style="text-transform: uppercase;"><%= listing.attributes.hotel %></a></span>
         <br>
@@ -191,19 +197,15 @@
   </p>
   <p>
   <img src="https://graph.facebook.com/<%= listing.attributes.fb_id %>/picture?type=square" class="fb_pic"/>
-  <span style="font-size: 14px; font-style: italic; color: #999;"><%= listing.attributes.name %> says,</span>
+  <span style="font-size: 14px; font-style: italic; color: #999;"><%= listing.attributes.first_name %> says,</span>
   <p style="font-size:14px; color: #666;">
 "<em><%= listing.attributes.desc %></em>"
   </p>
   <p style="font-size:14px; font-weight:600;">
     Tell <%= listing.attributes.first_name %> about yourself
     </p>
-  <p>
-  <div id="mutual_friends" class="hidden">
-    You and <%= listing.attributes.first_name %> have <div id="mutual_friend_count"></div> friends in common
-  </div>
+  
     <textarea id="guest_desc" class="form-control" rows="4">Bunk with me please!</textarea>
-    Tell <%= listing.attributes.first_name %> about yourself.
   </p>
   <p style="font-size:14px;">
     We'll contact <%= listing.attributes.first_name %> to let <%= listing.attributes.host_gender == 'male' ? 'him' : 'her' %> know you want to share a room.
