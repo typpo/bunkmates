@@ -88,10 +88,8 @@ body {
 
 .fb_pic {
   border-radius: 100px!important;
-  border: 1px solid #DDD;
-  margin-left: 10px;
+  border: 2px solid #DDD;
   margin-right: 10px;
-  margin-top: 10px;
 }
 
 .hotel_name {
@@ -101,6 +99,10 @@ body {
 }
 
 a {
+  color: #3498DB;
+}
+
+a:visited {
   color: #3498DB;
 }
 
@@ -163,4 +165,21 @@ a {
   margin-left: -40px;
   background-color: #FFF;
   border-bottom: 1px solid #CCC;
+}
+
+.form_label {
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding:5px;
+}
+
+.navbar-center a {
+  float:none;
+  display: block;
+  text-align: center;
+  padding-top: 10px;
+  font-size: 24px;
+  font-weight: 500;
+  color: #FFF!important;
 }

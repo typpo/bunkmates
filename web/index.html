@@ -22,7 +22,9 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button> -->
-      <a class="navbar-brand" href="#">Bunk|Mates</a>
+      <span class="navbar-center">
+      <a href="#">Bunk|Mates</a>
+    </span>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -73,31 +75,31 @@
 <!------------------------------------------- ADD LISTING --------- -->
   <div id="add_listing" class="slide hidden">
     <div class="container col-sm-offset-0  col-sm-12">
-      <p class="lead centered" style="font-size:22px; font-weight:600;">
+      <p class="lead centered" style="font-size:16px; font-weight:600;">
         Share your room, make some money
       </p>
-      <p>
+      <p class="form_label">
         I'm staying at ...
         <input id="hotel_name" type="text" class="input-lg form-control"
-               placeholder="hotel name" value="" />
+               placeholder="Hotel name" value="" />
         <ul id="hotel_dropdown">
         </ul>
       </p>
-      <p id="room_block" class="hidden">
+      <p id="room_block" class="hidden form_label">
         Select your room type if you know it
       </p>
         <p id="selected_room"> </p>
-        <select id="room_types" class="hidden">
+        <select id="room_types" class="hidden form-control">
         </select>
-      <p>
+      <p class="form_label">
         I'm charging $ (USD)
         <input id="charge" type="number" class="input-lg form-control" placeholder="40" value="" style="width:6em"/> per night
       </p>
-      <p>
+      <p class="form_label">
         What's your number?
         <input id="phone_number" type="tel" class="input-lg form-control" placeholder="5555555555" value="" style="width:8em"/>
       </p>
-      <p>
+      <p class="form_label">
         Give us some details about yourself and your room.
         <textarea id="user_desc" class="form-control" rows="3"></textarea>
       </p>
@@ -214,7 +216,7 @@ You and <%= listing.attributes.host_first_name %> have <b><div id="mutual_friend
   <p style="font-size:14px; color: #666; margin-left: 70px; margin-top: -20px;">
   "<em><%= listing.attributes.desc %></em>"
   </p>
-  <p style="font-size:14px; font-weight:600;">
+  <p class="form_label">
     Tell <%= listing.attributes.host_first_name %> about yourself:
     <textarea id="guest_desc" class="form-control" rows="4"></textarea>
   </p>
