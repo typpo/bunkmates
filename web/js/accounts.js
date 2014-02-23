@@ -12,7 +12,7 @@ var Transaction = Parse.Object.extend("Transaction");
 var Review = Parse.Object.extend("Review");
 var to_be_reviewed = [];
 if (Parse.User.current()) {
-  load_reviews();
+  //load_reviews();
 }
 
 function fblogin(cb) {
