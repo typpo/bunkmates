@@ -32,7 +32,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">Link</a></li>
-        <li><a href="#">Link</a></li>
+        <li id="please_review" class="hidden"><a href="#reviews">Please Review</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
           <ul class="dropdown-menu">
@@ -57,7 +57,7 @@
       </b></p>
       <div class="row">
           <!-- <div class="col-xs-2">
-             <button id="login" class="btn btn-primary">Sign In</button> 
+             <button id="login" class="btn btn-primary">Sign In</button>
           </div> -->
           <div class="col-xs-6">
             <button id="create_new_listing" class="btn btn-primary">List your Bed</button>
@@ -108,6 +108,17 @@
 
       </p>
       <button id="submit_request" class="btn btn-block btn-lg btn-primary">Let's Bunk!</button>
+    </div>
+  </div>
+<!------------------------------------------- REVIEW PAGE --------- -->
+  <div id="reviews" class="slide hidden">
+    <div class="container col-sm-offset-0  col-sm-12">
+      <p class="lead">
+        Please review your past bunkmates
+      </p>
+      <div id="list_of_users">
+
+      </div>
     </div>
   </div>
 
@@ -189,6 +200,8 @@
     </p>
   <p>
     <textarea id="guest_desc" class="form-control" rows="4">Bunk with me please!</textarea>
+    <div id="mutual_friends" class="hidden"></div>
+    Tell <%= listing.attributes.first_name %> about yourself.
   </p>
   <p style="font-size:14px;">
     We'll contact <%= listing.attributes.first_name %> to let <%= listing.attributes.host_gender == 'male' ? 'him' : 'her' %> know you want to share a room.

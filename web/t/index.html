@@ -27,7 +27,15 @@
   <div id="listings" class="slide">
     <div class="container">
       <div id="info">
-
+        Loading bunkmate request info...
+      </div>
+      <div class="row accept_reject">
+        <div class="col-xs-5">
+          <button id="accept_request" class="btn btn-primary">Yes, let's bunk!</button>
+        </div>
+        <div class="col-xs-5">
+          <button id="reject_request" class="btn btn-warning">No thanks</button>
+        </div>
       </div>
     </div>
   </div>
@@ -59,14 +67,6 @@
 <%= txn.attributes.guest_name %> says
 "<em><%= txn.attributes.guest_desc %></em>"
 </p>
-<div class="row">
-  <div class="col-xs-5">
-    <button id="accept_request" class="btn btn-primary">Yes, let's bunk!</button>
-  </div>
-  <div class="col-xs-5">
-    <button id="reject_request" class="btn btn-warning">No thanks</button>
-  </div>
-</div>
 </script>
 
 </body>

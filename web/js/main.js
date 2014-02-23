@@ -35,6 +35,9 @@ $(function() {
         $('#listing').removeClass('hidden');
         load_listing(query);
         break;
+      case "#reviews":
+        $('#reviews').removeClass('hidden');
+        break;
       default:
         get_all_listings();
         $('#listings').removeClass('hidden');

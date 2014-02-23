@@ -1,5 +1,8 @@
 var client = require('twilio')('AC7b5178b4fe2c349a8fa476ccb6c51e25', '35de62cdf391327193a38065b7b1a273');
 
+var Transaction = Parse.Object.extend("Transaction")
+var Listing = Parse.Object.extend("Listing")
+
 // Use Parse.Cloud.define to define as many cloud functions as you want.
 // For example:
 Parse.Cloud.define("hello", function(request, response) {
@@ -16,6 +19,97 @@ function formatPhone(n) {
 
 Parse.Cloud.define('sendRequest', function(request, response) {
   console.log(request.params);
+  client.sendSms({
+      to: formatPhone(request.params.to),
+      from: '+14152339929',
+      body: request.params.first_name
+              + ' wants to split a room with you!  http://bunkmates.co/t/?'
+              + request.params.listing_id,
+    }, function(err, responseData) {
+      if (err) {
+        console.log(err);
+        response.error('twilio send failed: ' + err);
+      } else {
+        console.log(responseData.from);
+        console.log(responseData.body);
+        response.success('twilio send worked');
+      }
+    }
+  );
+});
+
+Parse.Cloud.define('sendMeetupInfo', function(request, response) {
+  var txn_id = request.params.txn_id;
+  var q = new Parse.Query(Transaction);
+  q.get(txn_id, {
+    success: function(txn) {
+      console.log('txn', txn);
+      console.log(txn);
+      console.log('txn listing', txn.listing);
+      var q2 = new Parse.Query(Listing);
+      q2.get(txn.listing.objectId, {
+        sucess: function(listing) {
+          console.log('listing', listing);
+          // NOTE the query/object model API on Parse Cloud is subtly different
+          // from on frontend - everything is top-level, ie. no 'attributes' key,
+          // and id is named objectId (like mongo)
+          sendsms(listing.host_phone, txn.guest_phone);
+          response.success();
+        },
+        error: function(obj, err) {
+          console.log(obj, err);
+          response.error('Error: ' + err);
+        }
+      });
+    },
+    error: function(obj, err) {
+      console.log(obj, err);
+      response.error('Error: ' + err);
+    }
+  });
+
+
+  function sendsms(host_number, guest_number) {
+    console.log('Sending meetup text to', host_number, guest_number);
+    // SMS to host
+    client.sendSms({
+        to: formatPhone(host_number),
+        from: '+14152339929',
+        body: 'Meet your bunkmate at the hotel to give a room key and receive payment. Text or call to coordinate: ' + guest_number
+      }, function(err, responseData) {
+        if (err) {
+          console.log(err);
+          response.error('twilio send failed: ' + err);
+        } else {
+          console.log(responseData.from);
+          console.log(responseData.body);
+          response.success('twilio send worked');
+        }
+      }
+    );
+
+    // SMS to guest
+    client.sendSms({
+        to: formatPhone(guest_number),
+        from: '+14152339929',
+        body: 'Meet your bunkmate at the hotel to receive room key and give payment. Text or call to coordinate: ' + host_number
+      }, function(err, responseData) {
+        if (err) {
+          console.log(err);
+          response.error('twilio send failed: ' + err);
+        } else {
+          console.log(responseData.from);
+          console.log(responseData.body);
+          response.success('twilio send worked');
+        }
+      }
+    );
+  }
+});
+
+Parse.Cloud.define('sendRejection', function(request, response) {
+  console.log(request.params);
+  var txn_id = request.params.txn_id;
   client.sendSms({
       to: formatPhone(request.params.to),
       from: '+14152339929',

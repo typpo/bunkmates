@@ -12,10 +12,19 @@ if (!document.location.search || document.location.search.length < 2) {
   load_txn();
 }
 
-function load_txn(txn_id) {
+var global_txn;
+
+function load_txn() {
   var q = new Parse.Query(Transaction);
+  console.log('Querying', txn_id);
   q.get(txn_id, {
     success: function(txn) {
+      global_txn = txn;
+      if (txn.attributes.state != 'PENDING_APPROVAL') {
+        alert('Error: Can\'t ask for approval.  Transaction state is ' + txn.attributes.state);
+        return;
+
+      }
       $(function() {
         $('#info').html(tmpl('txn_info_tmpl', {
           txn: txn
@@ -23,22 +32,37 @@ function load_txn(txn_id) {
       });
     },
     error: function(obj, err) {
-      alert(err.message);
+      console.log(obj, err);
+      alert('Error loading your transaction: ' + err.message);
     }
   });
 }
 
 function accept_request() {
-  var txn = new Transaction();
-  txn.save({
-    id: txn_id,
-    state: 'PENDING_MEETUP'
+  $('.accept_reject').hide();
+  // Send SMS
+  Parse.Cloud.run('sendMeetupInfo', {
+    txn_id: global_txn.id
   }, {
-    success: function() {
-      alert('You got it!  Your guest has been notified.');
+    success: function(result) {
+      var txn = new Transaction();
+      txn.save({
+        id: txn_id,
+        state: 'PENDING_MEETUP'
+      }, {
+        success: function() {
+          alert('You got it!  Your guest has been notified and your listing has been removed.');
+          // TODO update listing with guest and set state to 'CLOSED'
+        },
+        error: function(obj, err) {
+          console.log(obj, err);
+          alert("Error :( " + err.message);
+        }
+      });
     },
-    error: function(obj, err) {
-      alert("Error :( " + err.message);
+    error: function(err) {
+      console.log(arguments);
+      alert('Sorry, sending text failed. ' + err.message);
     }
   });
 
@@ -46,6 +70,7 @@ function accept_request() {
 }
 
 function reject_request() {
+  $('.accept_reject').hide();
   var txn = new Transaction();
   txn.save({
     id: txn_id,
@@ -53,6 +78,7 @@ function reject_request() {
   }, {
     success: function() {
       alert('The request has been rejected.');
+      // TODO send rejection SMS
     },
     error: function(obj, err) {
       alert("Error :( " + err.message);
