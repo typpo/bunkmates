@@ -13,6 +13,12 @@ body {
     text-align: left;
 }
 
+.slide {
+  margin: 0 auto;
+  max-width: 600px;
+
+}
+
 .listing {
   border: 1px solid #ddd;
   padding: 5px 5px 5px 5px;
