@@ -97,7 +97,7 @@ function fill_listings(listings, cb) {
 function get_all_listings(cb) {
   var q = new Parse.Query(Listing);
   q.descending('createdAt');
-
+  q.notEqualTo('state', 'CLOSED');
   q.find({
     success: function(listings) {
       fill_listings(listings, cb);

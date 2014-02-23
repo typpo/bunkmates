@@ -83,6 +83,8 @@ function accept_request() {
         success: function() {
           alert('You got it!  Your guest has been notified and your listing has been removed.');
           // TODO update listing with guest and set state to 'CLOSED'
+          global_listing.set('state', 'CLOSED');
+          global_listing.save();
         },
         error: function(obj, err) {
           console.log(obj, err);
