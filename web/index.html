@@ -74,16 +74,18 @@
   <div id="add_listing" class="slide hidden">
     <div class="container col-sm-offset-0  col-sm-12">
       <p class="lead centered" style="font-size:22px; font-weight:600;">
-        List a Bed, Make Money!
+        Share your room, make some money
       </p>
-      <p>
+      <p">
         I'm staying at ...
         <input id="hotel_name" type="text" class="input-lg form-control"
-               placeholder="hotel name" value="hotel california" />
+               placeholder="hotel name" value="" />
         <ul id="hotel_dropdown">
         </ul>
       </p>
-      <p>
+      <p id="room_block" class="hidden">
+        Select your room type if you know it
+      </p>
         <p id="selected_room"> </p>
         <ul id="room_types">
         </ul>
@@ -93,11 +95,11 @@
       </p>
       <p>
         What's your number?
-        <input id="phone_number" type="tel" class="input-lg form-control" placeholder="9147727429" value="9147727429" style="width:8em"/>
+        <input id="phone_number" type="tel" class="input-lg form-control" placeholder="5555555555" value="" style="width:8em"/>
       </p>
       <p>
         Give us some details about yourself and your room.
-        <textarea id="user_desc" class="form-control" rows="3">blah blah blah</textarea>
+        <textarea id="user_desc" class="form-control" rows="3">Make it exciting if you want to make new friends!</textarea>
       </p>
       <button id="submit_listing" class="btn btn-block btn-lg btn-primary">List my room!</button>
     </div>
