@@ -67,13 +67,16 @@ $(function() {
   $('#hotel_name').on('keyup', function() {
     hotel_input();
   });
-  var autocomplete = new google.maps.places.Autocomplete($('#places_auto')[0]);
-  google.maps.event.addListener(autocomplete, 'place_changed', function() {
-    var place = autocomplete.getPlace();
-    if (!place.geometry) {
-      alert('can\'t geocode this place :(');
-      return;
-    }
-    filter_results(place.geometry.location);
-  });
+
+  window.gmaps_initialize = function() {
+    var autocomplete = new google.maps.places.Autocomplete($('#places_auto')[0]);
+    google.maps.event.addListener(autocomplete, 'place_changed', function() {
+      var place = autocomplete.getPlace();
+      if (!place.geometry) {
+        alert('can\'t geocode this place :(');
+        return;
+      }
+      filter_results(place.geometry.location);
+    });
+  }
 });
