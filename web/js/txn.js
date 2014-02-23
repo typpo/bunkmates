@@ -44,8 +44,17 @@ function accept_request() {
   }, {
     success: function() {
       alert('You got it!  Your guest has been notified and your listing has been removed.');
-      // TODO update listing
-      // TODO sent SMS
+      // TODO update listing with guest and set state to 'CLOSED'
+      // Send SMS
+      Parse.Cloud.run('sendMeetupInfo', {
+
+      }, {
+        success: function(result) {
+          alert('Your request was sent!');
+        },
+        error: function(error) {
+        }
+      });
     },
     error: function(obj, err) {
       console.log(obj, err);
