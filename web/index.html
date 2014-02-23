@@ -18,7 +18,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
+    <div class="navbar-header" style="background-color: #2980B9;">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
@@ -52,9 +52,9 @@
 <!------------------------------------------- MAIN LISTING / SEARCH VIEW --------- -->
   <div id="listings" class="slide">
     <div class="container">
-      <p class="lead centered"><em>
+      <p class="lead centered" style="font-size:22px"><b>
         Share a Room, Save some Money!
-      </em></p>
+      </b></p>
       <div class="row">
           <!-- <div class="col-xs-2">
              <button id="login" class="btn btn-primary">Sign In</button> 
@@ -76,29 +76,29 @@
 <!------------------------------------------- ADD LISTING --------- -->
   <div id="add_listing" class="slide hidden">
     <div class="container col-sm-offset-0  col-sm-12">
-      <p class="lead">
-        Make some money off your hotel room.
+      <p class="lead centered" style="font-size:22px; font-weight:600;">
+        List a Bed, Make Money!
       </p>
       <p>
-        &rarr; I'm looking for someone to split my room costs at...
+        I'm staying at ...
         <input id="hotel_name" type="text" class="input-lg form-control"
                placeholder="hotel name" value="hotel california" />
         <ul id="hotel_dropdown">
         </ul>
       </p>
       <p>
-        &rarr; I'm charging $
-        <input id="charge" type="number" class="input-lg form-control" placeholder="40" value="" style="width:6em"/>
+        I'm charging $ (USD)
+        <input id="charge" type="number" class="input-lg form-control" placeholder="40" value="" style="width:6em"/> per night
       </p>
       <p>
-        &rarr; What's yo number?
+        What's your number?
         <input id="phone_number" type="tel" class="input-lg form-control" placeholder="9147727429" value="9147727429" style="width:8em"/>
       </p>
       <p>
         Give us some details about yourself and your room.
         <textarea id="user_desc" class="form-control" rows="3">blah blah blah</textarea>
       </p>
-      <button id="submit_listing" class="btn btn-block btn-lg btn-success">List my room!</button>
+      <button id="submit_listing" class="btn btn-block btn-lg btn-primary">List my room!</button>
     </div>
   </div>
 <!------------------------------------------- INDIVIDUAL LISTING --------- -->
@@ -107,7 +107,7 @@
       <p id="listing_desc">
 
       </p>
-      <button id="submit_request" class="btn btn-block btn-lg btn-success">Send request</button>
+      <button id="submit_request" class="btn btn-block btn-lg btn-primary">Let's Bunk!</button>
     </div>
   </div>
 
@@ -136,7 +136,7 @@
   <div class="listing">
 
     <img src="https://graph.facebook.com/<%= listing.attributes.fb_id %>/picture" class="fb_pic"/>
-    <span style="font-size: 14px; font-style: italic; color: #999;"><%= listing.attributes.first_name %> wants to share a room at</span>
+    <span style="font-size: 14px; font-style: italic; color: #999;"><%= listing.attributes.first_name %> <%= listing.attributes.last_name %> wants to share a room at</span>
 
     <div style="margin-left: 65px;">
       <div>
@@ -163,23 +163,35 @@
 </script>
 
 <script type="text/html" id="listing_desc_tmpl">
-  <h4>Stay at <%= listing.attributes.hotel %> for cheap!</h4>
+  <!-- <h4>Stay at <%= listing.attributes.hotel %> for cheap!</h4> -->
+    <a href="#listing?<%= listing.id %>" style="text-transform: uppercase;"><%= listing.attributes.hotel %></a></span>
+        <br>
+        <span style="font-size:12px; font-weight:600;">
+        <%= listing.attributes.rating %>-star
+        </span>
+        <span style="font-size: 25px; font-weight: bold; float: right; margin-right: 10px;">$<%= listing.attributes.price %>
+      </span>
+      </div>
+      <p style="font-size: 12px">
+        <%= listing.attributes.address %>
+      </p>
   <p>
   <img src="<%= listing.attributes.img %>" class="img-responsive" />
-  <%= listing.attributes.rating %>-star
-  <br>
-  <%= listing.attributes.address %>
   </p>
   <p>
-  <img src="https://graph.facebook.com/<%= listing.attributes.fb_id %>/picture?type=square"/>
-  <%= listing.attributes.name %> says, "<em><%= listing.attributes.desc %></em>"
+  <img src="https://graph.facebook.com/<%= listing.attributes.fb_id %>/picture?type=square" class="fb_pic"/>
+  <span style="font-size: 14px; font-style: italic; color: #999;"><%= listing.attributes.name %> says,</span>
+  <p style="font-size:14px; color: #666;">
+"<em><%= listing.attributes.desc %></em>"
   </p>
+  <p style="font-size:14px; font-weight:600;">
+    Tell <%= listing.attributes.first_name %> about yourself
+    </p>
   <p>
-    Tell <%= listing.attributes.first_name %> about yourself.
-    <textarea id="guest_desc" class="form-control" rows="3">bunk with me please!</textarea>
+    <textarea id="guest_desc" class="form-control" rows="4">Bunk with me please!</textarea>
   </p>
-  <p>
-    We'll contact <%= listing.attributes.first_name %> at let <%= listing.attributes.host_gender == 'male' ? 'him' : 'her' %> know you want to share a room.
+  <p style="font-size:14px;">
+    We'll contact <%= listing.attributes.first_name %> to let <%= listing.attributes.host_gender == 'male' ? 'him' : 'her' %> know you want to share a room.
   </p>
 </script>
 
