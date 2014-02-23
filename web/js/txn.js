@@ -41,8 +41,7 @@ function load_txn() {
 function accept_request() {
   $('.accept_reject').hide();
   // Send SMS
-  var listing_attr = global_txn.attributes.listing.attributes;
-  console.log(listing_attr);
+  var listing_id = global_txn.attributes.listing.id;
   var txn_attr = global_txn.attributes;
   Parse.Cloud.run('sendMeetupInfo', {
     // Stupid parse workaround
@@ -50,10 +49,7 @@ function accept_request() {
       guest_name: txn_attr.guest_name,
       guest_phone: txn_attr.guest_phone
     },
-    listing: {
-      host_phone: listing_attr.host_phone,
-      host_name: listing_attr.host_name
-    }
+    listing_id: listing_id
   }, {
     success: function(result) {
       var txn = new Transaction();
