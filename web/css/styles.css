@@ -101,3 +101,9 @@ a {
 .light_text {
   font-weight: 100;
 }
+
+#listing_desc {
+  background-color: #FFFFFF;
+  padding: 10px;
+  border: 1px solid #DDDDDD;
+}
