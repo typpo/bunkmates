@@ -223,14 +223,16 @@ function load_listing(id) {
     listing: listing
   }));
 
-  FB.api('/me/mutualfriends/' + listing._serverData.fb_id, function(resp) {
-    if (!resp || !resp.data || !resp.data.length) {
-      $('#mutual_friends').addClass('hidden');
-    } else {
-      $('#mutual_friends').html(resp.data.length).removeClass('hidden');
-    }
-  });
-
+  if (Parse.User.current()) {
+    FB.api('/me/mutualfriends/' + listing._serverData.fb_id, function(resp) {
+      if (!resp || !resp.data || !resp.data.length) {
+        $('#mutual_friends').addClass('hidden');
+      } else {
+        $('#mutual_friends').removeClass('hidden');
+        $('#mutual_friend_count').html(resp.data.length);
+      }
+    });
+  }
 }
 
 function filter_results(loc, cb) {
