@@ -24,8 +24,13 @@ function submit_listing() {
         latitude: parseFloat(selected_hotel_info._source.Latitude),
         longitude: parseFloat(selected_hotel_info._source.Longitude)
       });
+      var user = Parse.User.current();
       // SAVE THE LISTING
       listing.save({
+        state: 'PENDING_APPROVAL',
+        // only set guest when the full transaction is complete
+        guest: null,
+        reviewed: false,
         hid: selected_hotel_info._id,
         location: geo_point,
         eid: selected_hotel_info._source.id,
@@ -40,7 +45,8 @@ function submit_listing() {
         fb_id: resp.id,
         host_email: resp.email,
         host_gender: resp.gender,
-        host_phone: phone
+        host_phone: phone,
+        user: user
       }, {
         success: function(listing) {
           // The object was saved successfully.
@@ -141,9 +147,11 @@ function submit_request() {
   var proceed = function() {
     console.log('proceeding');
     FB.api('/me', function(resp) {
+      var user = Parse.User.current();
       // Save the TXN
       txn.save({
         state: 'PENDING_APPROVAL',
+        reviewed: false,
         listing: currently_viewing_listing,
         guest_name: resp.first_name + ' ' + resp.last_name,
         guest_first_name: resp.first_name,
@@ -151,7 +159,8 @@ function submit_request() {
         guest_email: resp.email,
         guest_gender: resp.gender,
         guest_phone: phone,
-        guest_desc: guest_desc
+        guest_desc: guest_desc,
+        user: user
       }, {
         success: function(txn) {
           // The object was saved successfully.
