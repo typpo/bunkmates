@@ -27,6 +27,7 @@ function fblogin(cb) {
       }
     },
     error: function(user, error) {
+      $('#loading').hide();
       alert("Could not fully authorize you.  We require Facebook accounts to make sure you're not creepy.");
     }
   });
