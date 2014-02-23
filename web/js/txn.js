@@ -42,7 +42,7 @@ function accept_request() {
   $('.accept_reject').hide();
   // Send SMS
   Parse.Cloud.run('sendMeetupInfo', {
-    txn: global_txn
+    txn_id: global_txn.id
   }, {
     success: function(result) {
       var txn = new Transaction();
