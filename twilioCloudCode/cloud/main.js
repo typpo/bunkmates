@@ -36,27 +36,9 @@ Parse.Cloud.define('sendRequest', function(request, response) {
 });
 
 Parse.Cloud.define('sendMeetupInfo', function(request, response) {
-  var txn_id = request.params.txn_id;
-  var listing_id = request.params.listing_id
-  var txn_query = new Parse.Query('Transaction');
-  txn_query.get(txn_id, {
-    success: function(txn) {
-      var listing_query = new Parse.Query('Listing');
-      listing_query.get(listing_id, {
-        success: function(listing) {
-          // send smses
-          sendsms(listing.host_phone, txn.guest_phone);
-          response.success('yeasss');
-        },
-        error: function() {
-          response.error(err);
-        }
-      });
-    },
-    error: function(obj, err) {
-      response.error(err);
-    }
-  });
+  var txn = request.params.txn;
+  var listing = request.params.attributes.listing;
+  sendsms(listing.host_phone, txn.guest_phone);
 
   function sendsms(host_number, guest_number) {
     console.log('Sending meetup text to', host_number, guest_number);
