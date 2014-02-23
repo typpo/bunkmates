@@ -3,6 +3,7 @@
 Parse.initialize("eYl06p1bCOWl7oInD4z6MTtNuNJGkAeC8vRWMB3b", "WMyuYm1Wmb9NtbzkgNQdq1UyYZfeOQJ5ZDVhRLme");
 
 window.fbAsyncInit = function() {
+  console.log('fbasync init');
   // Nav setup
   new FastClick(document.body);
   Parse.FacebookUtils.init({

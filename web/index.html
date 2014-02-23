@@ -146,8 +146,8 @@
 <script type="text/html" id="listing_tmpl">
   <div class="listing">
 
-    <img src="https://graph.facebook.com/<%= listing.attributes.fb_id %>/picture" class="fb_pic"/>
-    <span style="font-size: 14px; font-style: italic; color: #999;"><%= listing.attributes.first_name %> <%= listing.attributes.last_name %> wants to share a room at</span>
+    <img src="https://graph.facebook.com/<%= listing.attributes.host_fb_id %>/picture" class="fb_pic"/>
+    <span style="font-size: 14px; font-style: italic; color: #999;"><%= listing.attributes.host_first_name %> <%= listing.attributes.last_name %> wants to share a room at</span>
 
     <div style="margin-left: 65px;">
       <div>
@@ -190,21 +190,21 @@
   <img src="<%= listing.attributes.img %>" class="img-responsive" />
   </p>
   <p>
-  <img src="https://graph.facebook.com/<%= listing.attributes.fb_id %>/picture?type=square" class="fb_pic"/>
-  <span style="font-size: 14px; font-style: italic; color: #999;"><%= listing.attributes.name %> says,</span>
+  <img src="https://graph.facebook.com/<%= listing.attributes.host_fb_id %>/picture?type=square" class="fb_pic"/>
+  <span style="font-size: 14px; font-style: italic; color: #999;"><%= listing.attributes.host_name %> says,</span>
   <p style="font-size:14px; color: #666;">
 "<em><%= listing.attributes.desc %></em>"
   </p>
   <p style="font-size:14px; font-weight:600;">
-    Tell <%= listing.attributes.first_name %> about yourself
+    Tell <%= listing.attributes.host_first_name %> about yourself
     </p>
   <p>
     <textarea id="guest_desc" class="form-control" rows="4">Bunk with me please!</textarea>
     <div id="mutual_friends" class="hidden"></div>
-    Tell <%= listing.attributes.first_name %> about yourself.
+    Tell <%= listing.attributes.host_first_name %> about yourself.
   </p>
   <p style="font-size:14px;">
-    We'll contact <%= listing.attributes.first_name %> to let <%= listing.attributes.host_gender == 'male' ? 'him' : 'her' %> know you want to share a room.
+    We'll contact <%= listing.attributes.host_first_name %> to let <%= listing.attributes.host_gender == 'male' ? 'him' : 'her' %> know you want to share a room.
   </p>
 </script>
 

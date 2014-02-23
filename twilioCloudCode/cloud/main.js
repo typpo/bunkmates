@@ -39,7 +39,10 @@ Parse.Cloud.define('sendRequest', function(request, response) {
 });
 
 Parse.Cloud.define('sendMeetupInfo', function(request, response) {
-  var txn_id = request.params.txn_id;
+  var txn = request.params.txn;
+  var listing = request.params.listing;
+  sendsms(listing.host_phone, txn.guest_phone);
+  /*
   var q = new Parse.Query(Transaction);
   q.equalTo('objectId', txn_id);
   q.find({
@@ -73,6 +76,7 @@ Parse.Cloud.define('sendMeetupInfo', function(request, response) {
       response.error('Error: ' + err);
     }
   });
+  */
 
 
   function sendsms(host_number, guest_number) {

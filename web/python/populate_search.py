@@ -1,27 +1,10 @@
 import csv
 import json
 
-def fillES(inFile, images):
+def fillES(inFile, images, rooms):
   with open(inFile, 'r') as csvFile:
       csvDict = csv.DictReader(csvFile, delimiter="|")
-      """
-      for o in csvDict:
-        mapping = {}
-        for type in o:
-          print type
-          mapping[type] = {
-            'boost': 1.0,
-            'index': 'analyzed',
-            'store': 'yes',
-            'type': 'string',
-            'term_vector': 'with_positions_offsets'
-          }
-        print mapping
-        conn.indices.put_mapping('hotel', {'properties':mapping}, ['hotels'])
-        break
-      """
-      with open('../../expedia/HotelsBulk.json', 'w') as jsonFile:
-        hotels = []
+      with open('../../expedia/HotelsBulkRooms.json', 'w') as jsonFile:
         index = {
             "index": {
               "_index": "hotels",
@@ -36,12 +19,29 @@ def fillES(inFile, images):
             obj["img"] = images[id]
           else :
             obj["img"] = ""
-          hotels.append(obj)
+          if id in rooms:
+            obj["rooms"] = rooms[id]
+          else:
+            obj["rooms"] = []
           index["index"]["_id"] = id
           jsonFile.write( json.dumps(index) )
           jsonFile.write('\n')
           jsonFile.write( json.dumps(obj) )
           jsonFile.write('\n')
+
+def getRooms(inFile):
+  with open(inFile, 'r') as csvFile:
+      csvDict = csv.DictReader(csvFile, delimiter="|")
+      rooms = {}
+      print "start rooms"
+      for obj in csvDict:
+        eid = obj['\xef\xbb\xbfEANHotelID'];
+        del obj['\xef\xbb\xbfEANHotelID']
+        if not eid in rooms:
+          rooms[eid] = []
+        rooms[eid].append(obj)
+      print "end rooms"
+      return rooms
 
 def getImages(inFile):
   with open(inFile, 'r') as csvFile:
@@ -55,4 +55,5 @@ def getImages(inFile):
 
 if __name__ == "__main__":
   images = getImages('/home/ubuntu/expedia/HotelImageList.txt')
-  fillES('/home/ubuntu/expedia/ActivePropertyList.txt', images)
+  rooms = getRooms('/home/ubuntu/expedia/RoomTypeList.txt')
+  fillES('/home/ubuntu/expedia/ActivePropertyList.txt', images, rooms)
