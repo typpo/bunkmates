@@ -26,7 +26,10 @@ $(function() {
 
   function runhash() {
     console.log('Hash changed');
+    var $current = $('.slide-fixed');
     $('.slide').addClass('hidden');
+    $('.slide').removeClass('slide-animate');
+    //$('.slide').removeClass('slide-out');
     var hash = window.location.hash;
     var query = '';
     if (hash.indexOf('?') > -1) {
@@ -34,22 +37,45 @@ $(function() {
       hash = sp[0];
       query = sp[1];
     }
+    var $slide;
     switch (hash) {
       case "#add":
-        $('#add_listing').removeClass('hidden');
+        $slide = $('#add_listing');
+        $slide.removeClass('hidden');
+        $slide.addClass('slide-animate');
         break;
       case "#listing":
-        $('#listing').removeClass('hidden');
+        $slide = $('#listing');
         load_listing(query);
+        $slide.removeClass('hidden');
+        $slide.addClass('slide-animate');
         break;
       case "#reviews":
-        $('#reviews').removeClass('hidden');
+        $slide = $('#reviews');
+        $slide.removeClass('hidden');
+        $slide.addClass('slide-animate');
         break;
       default:
         get_all_listings();
-        $('#listings').removeClass('hidden');
+        $slide = $('#listings');
+        $slide.removeClass('hidden');
+        $slide.addClass('slide-animate');
         break;
     }
+    /*
+    $current.addClass('slide-out');
+    $current.one("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){
+        $(this).addClass('hidden');
+        $(this).addClass('slide');
+        $(this).removeClass("slide-out");
+        $(this).removeClass("slide-fixed");
+    });
+    $slide.one("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function(){
+        $(this).addClass('slide-fixed');
+        //$(this).removeClass("slide-animate");
+        //$(this).removeClass('slide');
+    });
+    */
   }
   get_all_listings(runhash);
 
