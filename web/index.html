@@ -150,12 +150,12 @@ document.body.appendChild(script);
 </script>
 
 <script type="text/html" id="listing_tmpl">
-  <div class="listing">
+  <div data-listing-id="<%= listing.id %>" class="listing">
     <img src="https://graph.facebook.com/<%= listing.attributes.host_fb_id %>/picture" class="fb_pic"/>
     <span style="font-size: 14px; font-style: italic; color: #999;"><%= listing.attributes.host_first_name %> wants to share a room at</span>
     <div style="margin-left: 65px;">
       <div>
-        <a href="#listing?<%= listing.id %>" style="text-transform: uppercase;"><%= listing.attributes.hotel %></a></span>
+        <a style="text-transform: uppercase;"><%= listing.attributes.hotel %></a></span>
         <br><span style="font-size:12px; font-weight:600;">
         <%= listing.attributes.rating %>-star
         </span>
