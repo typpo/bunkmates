@@ -183,3 +183,7 @@ a:visited {
   font-weight: 500;
   color: #FFF!important;
 }
+
+.lead {
+  margin-bottom: 15px!important;
+}
