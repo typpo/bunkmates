@@ -29,6 +29,7 @@ $(function() {
     var $current = $('.slide-fixed');
     $('.slide').addClass('hidden');
     $('.slide').removeClass('slide-animate');
+    $('#go_home').hide();
     //$('.slide').removeClass('slide-out');
     window.scrollTo(0, 0); // reset scroll
     var hash = window.location.hash;
@@ -44,17 +45,20 @@ $(function() {
         $slide = $('#add_listing');
         $slide.removeClass('hidden');
         $slide.addClass('slide-animate');
+        $('#go_home').show();
         break;
       case "#listing":
         $slide = $('#listing');
         load_listing(query);
         $slide.removeClass('hidden');
         $slide.addClass('slide-animate');
+        $('#go_home').show();
         break;
       case "#reviews":
         $slide = $('#reviews');
         $slide.removeClass('hidden');
         $slide.addClass('slide-animate');
+        $('#go_home').show();
         break;
       default:
         get_all_listings();

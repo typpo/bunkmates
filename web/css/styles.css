@@ -109,7 +109,8 @@ a:visited {
 }
 
 .centered {
-  text-align: center;
+  text-align: center!important;
+  font-size:16px;
 }
 
 .light_text {
@@ -169,6 +170,9 @@ a:visited {
   border-bottom: 1px solid #CCC;
 }
 
+#room_types {
+  margin-left: 5px;
+}
 .slide {
   position: absolute;
   left: -100%;
