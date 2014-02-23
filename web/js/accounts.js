@@ -33,6 +33,20 @@ function fblogin(cb) {
   });
 }
 
+var fb_login_status;
+function getFbLoginStatus() {
+  FB.getLoginStatus(function(response) {
+    console.log('fb login status initialized');
+    fb_login_status = response;
+   });
+}
+
+if (typeof FB === 'undefined') {
+  fb_init_fns.push(getFbLoginStatus);
+} else {
+  getFbLoginStatus();
+}
+
 function load_reviews() {
   to_be_reviewed = [];
   var user = Parse.User.current();

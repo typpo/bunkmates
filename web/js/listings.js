@@ -70,17 +70,20 @@ function submit_listing() {
     });
   }
 
-  FB.getLoginStatus(function(response) {
-    if (response.status === 'connected') {
-      var uid = response.authResponse.userID;
-      var accessToken = response.authResponse.accessToken;
-      proceed();
-    } else if (response.status === 'not_authorized') {
-      fblogin(proceed);
-    } else {
-      fblogin(proceed);
-    }
-   });
+  if (!fb_login_status) {
+    $('#loading').hide();
+    alert('Could not fetch your Facebook login status. Try again?');
+    return false;
+  }
+  if (fb_login_status.status === 'connected') {
+    var uid = fb_login_status.authfb_login_status.userID;
+    var accessToken = fb_login_status.authfb_login_status.accessToken;
+    proceed();
+  } else if (fb_login_status.status === 'not_authorized') {
+    fblogin(proceed);
+  } else {
+    fblogin(proceed);
+  }
   return false;
 }
 
@@ -224,17 +227,21 @@ function submit_request() {
     });
   }
 
-  FB.getLoginStatus(function(response) {
-    if (response.status === 'connected') {
-      var uid = response.authResponse.userID;
-      var accessToken = response.authResponse.accessToken;
-      proceed();
-    } else if (response.status === 'not_authorized') {
-      fblogin(proceed);
-    } else {
-      fblogin(proceed);
-    }
-   });
+  if (!fb_login_status) {
+    $('#loading').hide();
+    alert('Could not fetch your Facebook login status. Try again?');
+    return false;
+  }
+  if (fb_login_status.status === 'connected') {
+    var uid = fb_login_status.authfb_login_status.userID;
+    var accessToken = fb_login_status.authfb_login_status.accessToken;
+    proceed();
+  } else if (fb_login_status.status === 'not_authorized') {
+    fblogin(proceed);
+  } else {
+    fblogin(proceed);
+  }
+  return false;
 }
 
 function hotel_selected() {
