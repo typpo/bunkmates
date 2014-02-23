@@ -36,6 +36,7 @@ function load_txn() {
 }
 
 function accept_request() {
+  $('.accept_reject').hide();
   var txn = new Transaction();
   txn.save({
     id: txn_id,
@@ -56,6 +57,7 @@ function accept_request() {
 }
 
 function reject_request() {
+  $('.accept_reject').hide();
   var txn = new Transaction();
   txn.save({
     id: txn_id,
