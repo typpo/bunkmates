@@ -157,7 +157,7 @@ document.body.appendChild(script);
       <div>
         <a href="#listing?<%= listing.id %>" style="text-transform: uppercase;"><%= listing.attributes.hotel %></a></span>
         <br><span style="font-size:12px; font-weight:600;">
-        <%= listing.attributes.rating %>-star
+        <%= parseInt(listing.attributes.rating) %>-star
         </span>
         <br>
         <span style="font-size: 25px; font-weight: bold; float: right; margin-right: 10px;">$<%= listing.attributes.price %>
@@ -193,7 +193,7 @@ You and <%= listing.attributes.host_first_name %> have <b><div id="mutual_friend
     <a href="#listing?<%= listing.id %>" style="text-transform: uppercase;"><%= listing.attributes.hotel %></a></span>
         <br>
         <span style="font-size:12px; font-weight:600;">
-        <%= listing.attributes.rating %>-star
+        <%= parseInt(listing.attributes.rating) %>-star
         </span>
         <span style="font-size: 25px; font-weight: bold; float: right; margin-right: 10px;">$<%= listing.attributes.price %>
       </span>

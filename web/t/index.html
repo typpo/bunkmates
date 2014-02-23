@@ -34,6 +34,11 @@
           <button id="reject_request" class="btn btn-warning col-xs-12">No thanks</button>
         </div>
       </div>
+      <div class="row submit_review_container">
+        <div class="col-xs-12">
+          <button id="submit_review" class="btn btn-primary col-xs-12">Submit review</button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -77,10 +82,37 @@
 
 <script type="text/html" id="txn_review_tmpl">
 <p class="lead">
-Please submit a review of your stay.
+Our community thrives on establishing trust.  Please leave a review of your bunkmate stay.
 </p>
 <p>
-
+Was your bunkmate quiet and respectful?  Would you bunk again?
+</p>
+<p>
+<form>
+<label>
+<input id="star1" name="stars" type="radio" value="1"/> 1 star (bad roommate)
+</label>
+<br>
+<label>
+<input id="star2" name="stars" type="radio" value="2"/> 2 star (unpleasant)
+</label>
+<br>
+<label>
+<input id="star3" name="stars" type="radio" value="3" checked/> 3 star (ok)
+</label>
+<br>
+<label>
+<input id="star4" name="stars" type="radio" value="4"/> 4 star (good)
+</label>
+<br>
+<label>
+<input id="star5" name="stars" type="radio" value="5"/> 5 star (excellent roommate)
+</label>
+</form>
+</p>
+<p>
+Justify your rating:<br>
+<textarea id="review_text" class="form-control"></textarea>
 </p>
 </script>
 
