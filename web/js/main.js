@@ -2,7 +2,13 @@
 
 Parse.initialize("eYl06p1bCOWl7oInD4z6MTtNuNJGkAeC8vRWMB3b", "WMyuYm1Wmb9NtbzkgNQdq1UyYZfeOQJ5ZDVhRLme");
 
+var fb_init_fns = [];
 window.fbAsyncInit = function() {
+  for (var i=0; i < fb_init_fns.length; ++i) {
+    fb_init_fns[i]();
+  }
+}
+fb_init_fns.push(function() {
   console.log('fbasync init');
   // Nav setup
   new FastClick(document.body);
@@ -13,7 +19,7 @@ window.fbAsyncInit = function() {
     cookie     : true, // enable cookies to allow Parse to access the session
     xfbml      : true  // parse XFBML
   });
-};
+});
 
 $(function() {
   $(window).on('hashchange', runhash);

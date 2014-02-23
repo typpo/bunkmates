@@ -195,12 +195,11 @@
   <p style="font-size:14px; color: #666;">
 "<em><%= listing.attributes.desc %></em>"
   </p>
-  <div id="mutual_friends" class="hidden" style="font-size:14px; font-weight:600;">
+  <p id="mutual_friends" class="hidden" style="font-size:14px;>
     You and <%= listing.attributes.host_first_name %> have <span id="mutual_friend_count"></span> friends in common!
-  </div>
-  <p style="font-size:14px; font-weight:600;">
-    Tell <%= listing.attributes.host_first_name %> about yourself
   </p>
+  <p style="font-size:14px; font-weight:600;">
+    Tell <%= listing.attributes.host_first_name %> about yourself:
     <textarea id="guest_desc" class="form-control" rows="4">Bunk with me please!</textarea>
   </p>
   <p style="font-size:14px;">

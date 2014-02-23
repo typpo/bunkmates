@@ -230,14 +230,21 @@ function load_listing(id) {
   $(function() {
     console.log('mutualfriends');
     if (Parse.User.current()) {
-      FB.api('/me/mutualfriends/' + listing._serverData.fb_id, function(resp) {
-        if (!resp || !resp.data || !resp.data.length) {
-          $('#mutual_friends').addClass('hidden');
-        } else {
-          $('#mutual_friends').removeClass('hidden');
-          $('#mutual_friend_count').html(resp.data.length);
-        }
-      });
+      var call_fb_api = function() {
+        FB.api('/me/mutualfriends/' + listing._serverData.fb_id, function(resp) {
+          if (!resp || !resp.data || !resp.data.length) {
+            $('#mutual_friends').addClass('hidden');
+          } else {
+            $('#mutual_friends').removeClass('hidden');
+            $('#mutual_friend_count').html(resp.data.length);
+          }
+        });
+      }
+      if (typeof FB === 'undefined') {
+        fb_init_fns.push(call_fb_api);
+      } else {
+        call_fb_api();
+      }
     }
   });
 } // end load_listing
