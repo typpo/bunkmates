@@ -222,6 +222,15 @@ function load_listing(id) {
   $('#listing_desc').html(tmpl('listing_desc_tmpl', {
     listing: listing
   }));
+
+  FB.api('/me/mutualfriends/' + listing._serverData.fb_id, function(resp) {
+    if (!resp || !resp.data || !resp.data.length) {
+      $('#mutual_friends').addClass('hidden');
+    } else {
+      $('#mutual_friends').html(resp.data.length).removeClass('hidden');
+    }
+  });
+
 }
 
 function filter_results(loc, cb) {
