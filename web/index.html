@@ -15,7 +15,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
+    <div class="navbar-header" style="width:100%">
       <a id="go_home" href="#" style="position:absolute;left:15px;top:18px;color:#fff; display:none;">&lsaquo; Back</a>
       <!-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>
@@ -23,30 +23,10 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button> -->
-      <span class="navbar-center">
-      <a href="#"><img src="../images/bunkmates_logo.png"></a>
-    </span>
+      <div class="navbar-center">
+        <a href="#"><img src="/images/bunkmates_logo.png"></a>
+      </div>
     </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-inverse navbar-nav">
-        <!-- <li class="active"><a href="#">Link</a></li> -->
-        <li id="please_review" class="hidden"><a href="#reviews">Please Review</a></li>
-        <!-- <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li> -->
-      </ul>
-    </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 <!------------------------------------------- MAIN LISTING / SEARCH VIEW --------- -->
@@ -206,7 +186,7 @@ You and <%= listing.attributes.host_first_name %> have <b><div id="mutual_friend
         <%= listing.attributes.address %>
       </p>
   <p>
-  <img src="<%= listing.attributes.img %>" class="img-responsive" />
+  <img src="<%= listing.attributes.img %>" class="img-responsive" style="margin: 0 auto;"/>
   </p>
   <p>
   <img src="https://graph.facebook.com/<%= listing.attributes.host_fb_id %>/picture?type=square" class="fb_pic"/>
