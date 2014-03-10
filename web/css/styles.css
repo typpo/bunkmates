@@ -229,3 +229,9 @@ a:visited {
 .lead {
   margin-bottom: 15px!important;
 }
+
+.img-shadow img {
+-moz-box-shadow: inset -5px -5px 5px #888;
+-webkit-box-shadow: inset -5px -5px 5px #888;
+box-shadow: inset -5px -5px 5px #888;
+}

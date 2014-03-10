@@ -158,9 +158,9 @@ document.body.appendChild(script);
       "<em><%= listing.attributes.desc %></em>"
       </p>
     </div>
-    <div>
-    <center>
-      <img src="<%= listing.attributes.img %>" class="img-responsive"/>
+    <div style="margin-bottom: 15px;">
+      <center> <!--- heheheheheh -->
+      <span class="img-shadow"><img src="<%= listing.attributes.img %>" class="img-responsive"/></span>
       </center>
     </div>
   </div>
@@ -186,7 +186,7 @@ You and <%= listing.attributes.host_first_name %> have <b><div id="mutual_friend
         <%= listing.attributes.address %>
       </p>
   <p>
-  <img src="<%= listing.attributes.img %>" class="img-responsive" style="margin: 0 auto;"/>
+    <span class="img-shadow"><img src="<%= listing.attributes.img %>" class="img-responsive" style="margin: 0 auto;"/></span>
   </p>
   <p>
   <img src="https://graph.facebook.com/<%= listing.attributes.host_fb_id %>/picture?type=square" class="fb_pic"/>
